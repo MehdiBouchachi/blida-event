@@ -5,7 +5,9 @@ import { FaArrowUp, FaClipboardList } from "react-icons/fa";
 
 export default function FloatingActions() {
   const [visible, setVisible] = useState(false);
+  const [inRegistration, setInRegistration] = useState(false);
 
+  /* Show actions after scroll */
   useEffect(() => {
     const onScroll = () => {
       setVisible(window.scrollY > 300);
@@ -15,15 +17,31 @@ export default function FloatingActions() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  /* Detect registration section */
+  useEffect(() => {
+    const section = document.getElementById("registration");
+    if (!section) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setInRegistration(entry.isIntersecting);
+      },
+      {
+        threshold: 0.4, // section reasonably in view
+      },
+    );
+
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, []);
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const scrollToRegister = () => {
     const el = document.getElementById("registration");
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
-    }
+    if (el) el.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
@@ -39,37 +57,41 @@ export default function FloatingActions() {
         }
       `}
     >
-      {/* Register */}
+      {/* REGISTER */}
       <button
         onClick={scrollToRegister}
         aria-label="Go to registration"
-        className="
+        className={`
           flex items-center justify-center
           w-11 h-11 rounded-full
           bg-blue-600 text-white
           shadow-lg
-          transition
+          transition-all duration-300 ease-out
           hover:bg-blue-700
           hover:-translate-y-0.5
           focus:outline-none
-        "
+
+          ${
+            inRegistration
+              ? "scale-150 opacity-0 pointer-events-none"
+              : "scale-100 opacity-100"
+          }
+        `}
       >
         <FaClipboardList className="text-sm" />
       </button>
 
-      {/* Scroll to top */}
+      {/* SCROLL TO TOP */}
       <button
         onClick={scrollToTop}
         aria-label="Scroll to top"
         className="
           flex items-center justify-center
           w-11 h-11 rounded-full
-         border border-slate-300
-          bg-white text-slate-600
-          shadow-sm
+          bg-slate-700 text-slate-100
+          shadow-md
           transition
-          hover:bg-slate-50
-          hover:text-slate-800
+          hover:bg-slate-800
           hover:-translate-y-0.5
           focus:outline-none
         "
