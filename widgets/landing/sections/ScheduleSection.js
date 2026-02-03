@@ -30,8 +30,7 @@ const schedule = [
     start: "09:15 AM",
     end: "09:30 AM",
     title: "Inaugural Session – Opening Remarks",
-    description:
-      "Opening remarks delivered by the University Rector, presenting the workshop objectives and strategic vision for distance learning.",
+    description: "Opening remarks delivered by The Rector of Blida 1 University.",
   },
   {
     index: "III",
@@ -77,7 +76,7 @@ const schedule = [
     index: "VIII",
     start: "12:30 PM",
     end: "12:45 PM",
-    title: "Closing Session – Conclusion and Perspectives",
+    title: "Closing Session – Conclusion and Recommendation",
     description:
       "Conclusion of the workshop with a call to action and presentation of next steps.",
   },

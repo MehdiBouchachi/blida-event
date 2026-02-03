@@ -62,28 +62,28 @@ export default function UniversityTransitionSection() {
               <li className="flex items-start gap-3 text-sm sm:text-base">
                 <FaCheckCircle className="mt-0.5 text-[var(--color-blue-600)] shrink-0" />
                 <span className="text-[var(--color-primary-700)]">
-                  Alignment with the National Digital Roadmap (SDN 2024–2025)
+                  Alignment with the National Digital Roadmap.
                 </span>
               </li>
 
               <li className="flex items-start gap-3 text-sm sm:text-base">
                 <FaCheckCircle className="mt-0.5 text-[var(--color-blue-600)] shrink-0" />
                 <span className="text-[var(--color-primary-700)]">
-                  Deployment of sustainable hybrid and distance learning models
+                  Deployment of sustainable hybrid and distance learning models.
                 </span>
               </li>
 
               <li className="flex items-start gap-3 text-sm sm:text-base">
                 <FaCheckCircle className="mt-0.5 text-[var(--color-blue-600)] shrink-0" />
                 <span className="text-[var(--color-primary-700)]">
-                  Integration of digital tools and AI-assisted feedback
+                  Integration of digital tools and AI-assisted feedback.
                 </span>
               </li>
 
               <li className="flex items-start gap-3 text-sm sm:text-base">
                 <FaCheckCircle className="mt-0.5 text-[var(--color-blue-600)] shrink-0" />
                 <span className="text-[var(--color-primary-700)]">
-                  Commitment to equity, access, and academic quality
+                  Commitment to equity, access, and academic quality.
                 </span>
               </li>
             </ul>

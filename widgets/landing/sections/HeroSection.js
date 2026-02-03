@@ -103,20 +103,36 @@ export default function HeroSection() {
             </p>
 
             {/* DESCRIPTION – DESKTOP */}
-            <p
-              className="
-                mt-10 hidden sm:block
-                text-lg leading-relaxed
-                text-[var(--color-primary-600)]
-                max-w-3xl mx-auto
-              "
-            >
-              An inaugural academic workshop addressing the strategic,
-              pedagogical, and institutional challenges of distance learning in
-              higher education. The event focuses on digital pedagogy, secure
-              online assessment, and governance models aligned with the
-              University 4.0 vision.
-            </p>
+            <div className="max-w-3xl mx-auto text-center space-y-6">
+              {/* MAIN DESCRIPTION */}
+              <p
+                className="text-base sm:text-lg leading-relaxed"
+                style={{ color: "var(--text-secondary)" }}
+              >
+                This academic workshop explores the transformation of higher
+                education in the 4.0 era, focusing on distance learning,
+                pedagogical innovation, and digital assessment practices within
+                universities.
+              </p>
+
+              {/* IMPORTANT NOTE */}
+              <div
+                className="mx-auto max-w-2xl rounded-xl border px-4 py-3"
+                style={{
+                  borderColor: "var(--color-blue-300)",
+                  background: "var(--color-blue-50)",
+                }}
+              >
+                <p
+                  className="text-sm sm:text-base font-medium"
+                  style={{ color: "var(--color-blue-800)" }}
+                >
+                  All registered faculty members and students who participate in
+                  the workshop will be awarded an official certificate of
+                  participation bearing their full name.
+                </p>
+              </div>
+            </div>
 
             {/* META */}
             <div
