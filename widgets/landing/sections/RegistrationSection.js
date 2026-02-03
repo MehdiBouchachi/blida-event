@@ -167,7 +167,7 @@ export default function RegistrationSection() {
     <section
       id="registration"
       className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-24 lg:py-32"
-    >
+    data-registration>
       {/* ================= HEADER ================= */}
       <div className="max-w-4xl mx-auto text-center mb-12 sm:mb-16 lg:mb-20">
         <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-[var(--color-primary-900)] tracking-tight">

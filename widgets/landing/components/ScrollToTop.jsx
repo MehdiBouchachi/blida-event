@@ -4,36 +4,39 @@ import { useEffect, useState } from "react";
 import { FaArrowUp, FaClipboardList } from "react-icons/fa";
 
 export default function FloatingActions() {
-  const [visible, setVisible] = useState(false);
-  const [inRegistration, setInRegistration] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [inRegistrationFlow, setInRegistrationFlow] = useState(false);
 
-  /* Show actions after scroll */
+  /* Detect scroll */
   useEffect(() => {
     const onScroll = () => {
-      setVisible(window.scrollY > 300);
+      setScrolled(window.scrollY > 300);
     };
 
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  /* Detect registration section */
+  /* Detect ANY PART of the registration form */
   useEffect(() => {
-    const section = document.getElementById("registration");
-    if (!section) return;
+    const registration = document.getElementById("registration");
+    if (!registration) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        setInRegistration(entry.isIntersecting);
+        setInRegistrationFlow(entry.isIntersecting);
       },
       {
-        threshold: 0.4, // section reasonably in view
+        rootMargin: "0px",
+        threshold: 0.05, // even a tiny intersection hides actions
       },
     );
 
-    observer.observe(section);
+    observer.observe(registration);
     return () => observer.disconnect();
   }, []);
+
+  const shouldShow = scrolled && !inRegistrationFlow;
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -51,8 +54,8 @@ export default function FloatingActions() {
         flex flex-col gap-3
         transition-all duration-300 ease-out
         ${
-          visible
-            ? "opacity-100 translate-y-0"
+          shouldShow
+            ? "opacity-100 translate-y-0 pointer-events-auto"
             : "opacity-0 translate-y-4 pointer-events-none"
         }
       `}
@@ -61,27 +64,21 @@ export default function FloatingActions() {
       <button
         onClick={scrollToRegister}
         aria-label="Go to registration"
-        className={`
+        className="
           flex items-center justify-center
           w-11 h-11 rounded-full
           bg-blue-600 text-white
           shadow-lg
-          transition-all duration-300 ease-out
+          transition
           hover:bg-blue-700
           hover:-translate-y-0.5
           focus:outline-none
-
-          ${
-            inRegistration
-              ? "scale-150 opacity-0 pointer-events-none"
-              : "scale-100 opacity-100"
-          }
-        `}
+        "
       >
         <FaClipboardList className="text-sm" />
       </button>
 
-      {/* SCROLL TO TOP */}
+      {/* GO UP */}
       <button
         onClick={scrollToTop}
         aria-label="Scroll to top"
