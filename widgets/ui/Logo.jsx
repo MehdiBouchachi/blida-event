@@ -16,11 +16,13 @@ export default function Logo() {
           sm:w-[54px] sm:h-[54px]
           lg:w-14 lg:h-14
         "
-        alt="Blida 1 University logo"
+        alt="University of Blida 1 logo"
         priority
       />
 
+      {/* TEXT BLOCK */}
       <div className="leading-tight min-w-0">
+        {/* UNIVERSITY NAME */}
         <div
           className="
             font-semibold
@@ -32,7 +34,21 @@ export default function Logo() {
             lg:text-lg
           "
         >
-          Blida 1 University
+          University of Blida 1
+        </div>
+
+        {/* TAGLINE */}
+        <div
+          className="
+            text-[0.85rem]
+            sm:text-[0.9rem]
+            lg:text-sm
+            font-medium
+            text-[var(--text-secondary)]
+            whitespace-nowrap
+          "
+        >
+          Leading 4.0 Transformation
         </div>
       </div>
     </div>
