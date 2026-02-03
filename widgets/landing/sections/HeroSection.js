@@ -135,7 +135,6 @@ export default function HeroSection() {
                   className="
                     text-sm sm:text-[0.95rem]
                     sm:leading-relaxed
-                    max-w-[36ch]
                     leading-[1.8]
                     text-[var(--color-primary-700)]
                   "
@@ -143,16 +142,11 @@ export default function HeroSection() {
                   <span className="font-semibold text-[var(--color-primary-800)]">
                     Certificate of Attendance:
                   </span>{" "}
-                  A named certificate of attendance will be issued to all registered participants upon completion of the workshop.
+                  A named certificate of attendance will be issued to all
+                  registered participants upon completion of the workshop.
                 </p>
-
-                
               </div>
             </div>
-
-          
-
-
 
             {/* META */}
             <div
