@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import logo from "../../../../public/logo.png";
-
+import Logo from "../../../ui/Logo";
 const NAV_LINKS = [
   { label: "Workshop Objectives", href: "#objectives" },
   { label: "Strategic Vision", href: "#strategy" },
@@ -27,22 +27,7 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row justify-between gap-16">
           {/* ================= LEFT / BRAND ================= */}
           <div className="max-w-sm space-y-7">
-            <div className="flex items-center gap-4">
-              <Image
-                src={logo}
-                width={48}
-                height={48}
-                alt="Blida 1 University"
-              />
-              <div>
-                <div
-                  className="text-lg font-semibold"
-                  style={{ color: "var(--color-primary-900)" }}
-                >
-                  Blida 1 University
-                </div>
-              </div>
-            </div>
+            <Logo />
 
             <p
               className="text-sm leading-relaxed"
@@ -66,11 +51,11 @@ export default function Footer() {
             <ul className="space-y-4 text-sm">
               {NAV_LINKS.map((item) => (
                 <li key={item.href}>
-                  <a href={item.href} className="transition-colors"
+                  <a
                     href={item.href}
-                    
+                    className="transition-colors"
                     style={{ color: "var(--color-primary-700)" }}
-                 >
+                  >
                     <span className="transition-colors duration-200 group-hover:text-[var(--color-blue-600)]">
                       {item.label}
                     </span>

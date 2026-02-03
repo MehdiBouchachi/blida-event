@@ -8,49 +8,48 @@ export default function Logo() {
       <div
         className="
           relative
-          w-[56px] h-[56px]
-          sm:w-[60px] sm:h-[60px]
-          md:w-[64px] md:h-[64px]
+          w-[64px] h-[64px]
           rounded-full
           bg-white
-          ring-1 sm:ring-2 ring-blue-700/20
-          shadow-sm sm:shadow-md
+          ring-2 ring-blue-700/20
+          shadow-md
           transition-all duration-300
+          group-hover:ring-blue-600/50
+          group-hover:shadow-lg
         "
       >
         <Image
           src={logo}
           alt="University of Blida 1"
           fill
-          className="object-contain p-[6px] sm:p-[5px]"
+          className="object-contain p-2"
           priority
         />
       </div>
 
       {/* TEXT */}
       <div className="leading-[1.15]">
+        {/* UNIVERSITY NAME */}
         <div
           className="
-            text-[1.05rem]
-            sm:text-[1.1rem]
-            md:text-[1.15rem]
+            text-[1.15rem]
             font-bold
             tracking-tight
             text-slate-900
-            whitespace-nowrap
+            transition-colors
           "
         >
           University of Blida 1
         </div>
 
+        {/* TAGLINE – MORE VISIBLE */}
         <div
           className="
-            mt-[1px]
-            text-[0.9rem]
-            sm:text-[0.95rem]
-            font-medium
-            text-slate-600
-            whitespace-nowrap
+            mt-[2px]
+            text-[0.95rem]
+            font-semibold
+            text-slate-700
+            tracking-normal
           "
         >
           Leading 4.0 Transformation

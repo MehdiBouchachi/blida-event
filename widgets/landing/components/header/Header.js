@@ -13,7 +13,6 @@ const NAV_LINKS = [
   { label: "Strategic Vision", href: "#strategy" },
   { label: "University 4.0", href: "#university-4" },
   { label: "Schedule", href: "#schedule" },
- 
 ];
 
 export default function Header() {
@@ -89,7 +88,6 @@ export default function Header() {
     );
   };
 
-
   return (
     <>
       {/* ================= HEADER ================= */}
@@ -102,7 +100,10 @@ export default function Header() {
         : "bg-transparent"
     }`}
       >
-        <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+        <div
+          className="max-w-7xl mx-auto px-6 h-20
+ flex items-center justify-between"
+        >
           {/* LEFT */}
           <a href="/" className="flex items-center gap-3">
             <Logo />
@@ -114,13 +115,24 @@ export default function Header() {
               <a
                 key={item.href}
                 href={item.href}
-                className="relative text-[15px] font-medium
-             text-[var(--color-primary-700)]
-             hover:text-[var(--color-blue-600)] transition
-             after:absolute after:left-0 after:-bottom-1
-             after:h-px after:w-0
-             after:bg-[var(--color-blue-600)]
-             after:transition-all hover:after:w-full"
+                className="
+    relative
+    text-[16.5px]
+    font-semibold
+    tracking-tight
+    text-[var(--color-primary-800)]
+    hover:text-[var(--color-blue-600)]
+    transition-colors
+
+    after:absolute
+    after:left-0
+    after:-bottom-1.5
+    after:h-[2px]
+    after:w-0
+    after:bg-[var(--color-blue-600)]
+    after:transition-all
+    hover:after:w-full
+  "
               >
                 {item.label}
               </a>

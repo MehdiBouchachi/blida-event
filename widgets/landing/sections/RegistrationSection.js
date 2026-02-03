@@ -40,8 +40,28 @@ const REQUIRED_FIELDS = {
     "moodleLevel",
     "easeOfUse",
   ],
-  3: ["difficulties", "improvements"],
+  3: [],
 };
+const FACULTY_GROUPS = [
+  {
+    label: "Faculties",
+    options: [
+      "Faculty of Medicine",
+      "Faculty of Technology",
+      "Faculty of Sciences",
+      "Faculty of Natural and Life Sciences",
+    ],
+  },
+  {
+    label: "Institutes",
+    options: [
+      "Institute of Aeronautics and Space Studies",
+      "Institute of Architecture and Urban Planning",
+      "Institute of Veterinary Sciences",
+      "ISTA Institute",
+    ],
+  },
+];
 
 const INITIAL_FORM_STATE = {
   fullName: "",
@@ -162,16 +182,20 @@ export default function RegistrationSection() {
         : [...prev[key], value],
     }));
   };
+  function isEmailInvalid() {
+    return form.email && !EMAIL_REGEX.test(form.email);
+  }
 
   return (
     <section
       id="registration"
       className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-24 lg:py-32"
-    data-registration>
+      data-registration
+    >
       {/* ================= HEADER ================= */}
       <div className="max-w-4xl mx-auto text-center mb-12 sm:mb-16 lg:mb-20">
         <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-[var(--color-primary-900)] tracking-tight">
-          Workshop Pre-Registration
+          Workshop Registration
         </h2>
 
         <p className="mt-4 sm:mt-6 text-sm sm:text-base md:text-lg leading-relaxed text-[var(--color-primary-600)]">
@@ -192,6 +216,7 @@ export default function RegistrationSection() {
                 value={form.fullName}
                 onChange={(v) => setForm({ ...form, fullName: v })}
                 inputRef={(el) => (fieldRefs.current.fullName = el)}
+                placeholder="Enter your full name (as it should appear on the certificate)"
               />
             </Field>
 
@@ -199,15 +224,24 @@ export default function RegistrationSection() {
               <Input
                 type="email"
                 value={form.email}
+                placeholder="example@univ-blida.dz"
                 onChange={(v) => setForm({ ...form, email: v })}
                 inputRef={(el) => (fieldRefs.current.email = el)}
               />
+
+              {isEmailInvalid() && (
+                <p className="text-sm text-[var(--color-red-600)] mt-1">
+                  Please enter a valid email address.
+                </p>
+              )}
             </Field>
 
-            <Field label="Faculty / Department" required>
-              <Input
+            <Field label="Faculty / Institute" required>
+              <Select
                 value={form.faculty}
                 onChange={(v) => setForm({ ...form, faculty: v })}
+                groups={FACULTY_GROUPS}
+                placeholder="— Select your faculty / institute —"
                 inputRef={(el) => (fieldRefs.current.faculty = el)}
               />
             </Field>
@@ -226,6 +260,7 @@ export default function RegistrationSection() {
                   "Administrative Staff",
                   "Other",
                 ]}
+                placeholder="— Select your status —"
                 inputRef={(el) => (fieldRefs.current.status = el)}
               />
             </Field>
@@ -239,6 +274,7 @@ export default function RegistrationSection() {
                   "No, I cannot attend",
                   "Not sure yet",
                 ]}
+                placeholder="— Confirm your attendance —"
                 inputRef={(el) => (fieldRefs.current.attendance = el)}
               />
             </Field>
@@ -281,6 +317,7 @@ export default function RegistrationSection() {
                     "Often unreliable",
                     "No regular internet access",
                   ]}
+                  placeholder="— Select your internet reliability —"
                   inputRef={(el) =>
                     (fieldRefs.current.internetReliability = el)
                   }
@@ -300,6 +337,7 @@ export default function RegistrationSection() {
                     "Rarely",
                     "Never",
                   ]}
+                  placeholder="— Select usage frequency —"
                   inputRef={(el) => (fieldRefs.current.usageFrequency = el)}
                 />
               </Field>
@@ -357,19 +395,21 @@ export default function RegistrationSection() {
 
         {step === 3 && (
           <Section title="Feedback & Suggestions">
-            <Field label="Main difficulties encountered" required>
+            <Field label="Main difficulties encountered">
               <Textarea
                 value={form.difficulties}
                 onChange={(v) => setForm({ ...form, difficulties: v })}
                 inputRef={(el) => (fieldRefs.current.difficulties = el)}
+                placeholder="Describe any difficulties or challenges you faced during the workshop (technical, organizational, or pedagogical)"
               />
             </Field>
 
-            <Field label="Suggested improvements" required>
+            <Field label="Suggested improvements">
               <Textarea
                 value={form.improvements}
                 onChange={(v) => setForm({ ...form, improvements: v })}
                 inputRef={(el) => (fieldRefs.current.improvements = el)}
+                placeholder="Share your suggestions to improve future workshops (content, format, tools, or organization)"
               />
             </Field>
           </Section>
@@ -380,9 +420,22 @@ export default function RegistrationSection() {
           <button
             disabled={step === 0}
             onClick={() => setStep(step - 1)}
-            className="text-sm font-medium text-[var(--color-primary-500)] hover:text-[var(--color-primary-800)] disabled:opacity-40"
+            className=" inline-flex items-center gap-2
+    px-4 py-2
+    rounded-lg
+    border border-[var(--color-primary-300)]
+    bg-[var(--color-primary-0)]
+    text-sm font-medium
+    text-[var(--color-primary-500)]
+    transition
+    hover:border-[var(--color-primary-600)]
+    hover:text-[var(--color-primary-700)]
+    hover:bg-[var(--color-primary-50)]
+    disabled:opacity-40
+    disabled:cursor-not-allowed"
           >
-            Back
+            <span className="hidden sm:block">Go back to previous step</span>
+            <span className="sm:hidden">Go back</span>
           </button>
 
           {step < 3 ? (
@@ -519,12 +572,13 @@ function Field({ label, required, children }) {
 }
 
 /* ================= INPUT ================= */
-function Input({ value, onChange, type = "text", inputRef }) {
+function Input({ value, onChange, type = "text", placeholder, inputRef }) {
   return (
     <input
       ref={inputRef}
       type={type}
       value={value}
+      placeholder={placeholder}
       onChange={(e) => onChange(e.target.value)}
       className="
         w-full
@@ -542,7 +596,14 @@ function Input({ value, onChange, type = "text", inputRef }) {
 }
 
 /* ================= SELECT ================= */
-function Select({ value, onChange, options, inputRef }) {
+function Select({
+  value,
+  onChange,
+  options,
+  groups,
+  placeholder = "— Select an option —",
+  inputRef,
+}) {
   return (
     <select
       ref={inputRef}
@@ -557,16 +618,30 @@ function Select({ value, onChange, options, inputRef }) {
         text-sm sm:text-base
         bg-[var(--color-primary-0)]
         focus:ring-2 focus:ring-[var(--color-blue-500)]
-
         outline-none
       "
     >
-      <option value="">Select an option</option>
-      {options.map((o) => (
-        <option key={o} value={o}>
-          {o}
-        </option>
-      ))}
+      {/* Placeholder */}
+      <option value="" disabled>
+        {placeholder}
+      </option>
+
+      {/* Grouped options */}
+      {groups
+        ? groups.map((group) => (
+            <optgroup key={group.label} label={group.label}>
+              {group.options.map((o) => (
+                <option key={o} value={o}>
+                  {o}
+                </option>
+              ))}
+            </optgroup>
+          ))
+        : options?.map((o) => (
+            <option key={o} value={o}>
+              {o}
+            </option>
+          ))}
     </select>
   );
 }
@@ -661,13 +736,14 @@ function DotScale({ value, onChange, labels }) {
 // [var(--color-primary-300)]
 
 /* ================= TEXTAREA ================= */
-function Textarea({ value, onChange, inputRef }) {
+function Textarea({ value, onChange, inputRef, placeholder }) {
   return (
     <textarea
       ref={inputRef}
       rows={4}
       value={value}
       onChange={(e) => onChange(e.target.value)}
+      placeholder={placeholder}
       className="
         w-full
         rounded-lg

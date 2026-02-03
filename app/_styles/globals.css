@@ -2,10 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-html,* {
+html,
+* {
   scroll-behavior: smooth;
 }
-
+section[id] {
+  scroll-margin-top: 80px; /* header height */
+}
 :root {
   /* ================= PRIMARY (Slate) ================= */
   --color-primary-0: #ffffff;
@@ -54,7 +57,7 @@ html,* {
   --color-indigo-600: #4f46e5; /* text-indigo-600 */
 
   --color-red-500: #ef4444; /* text-red-500 */
-
+  --color-red-600: #e7000b;
   /* Green */
   --color-green-500: #22c55e; /* bg-green-500 */
   --color-green-600: #16a34a; /* bg-green-600 */
@@ -93,4 +96,20 @@ html,* {
 }
 .schedule-row[data-tone="50"]:hover {
   --row-bg: var(--color-blue-50);
+}
+@keyframes note-marquee {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.animate-note-marquee {
+  animation: note-marquee 28s linear infinite;
+}
+
+.animate-note-marquee:hover {
+  animation-play-state: paused;
 }

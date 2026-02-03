@@ -30,13 +30,15 @@ const schedule = [
     start: "09:15 AM",
     end: "09:30 AM",
     title: "Inaugural Session – Opening Remarks",
-    description: "Opening remarks delivered by The Rector of Blida 1 University.",
+    description:
+      "Opening remarks delivered by The Rector of Blida 1 University.",
   },
   {
     index: "III",
     start: "09:30 AM",
     end: "10:15 AM",
     title: "Keynote I – Distance Learning and Pedagogical Innovation",
+    presenter: "Dr. L. OUAHRANI",
     description:
       "Presentation of innovative approaches, tools, and best practices for online and blended teaching.",
   },
@@ -61,6 +63,7 @@ const schedule = [
     start: "11:15 AM",
     end: "12:00 PM",
     title: "Keynote II – Online Exams: Challenges and Perspectives",
+    presenter: "Pr. D. BENNOUAR",
     description:
       "Discussion on assessment design, academic integrity, technical solutions, and institutional frameworks for online examinations.",
   },
@@ -213,6 +216,15 @@ export default function WorkshopSchedule() {
                     >
                       {item.title}
                     </h3>
+
+                    {item.presenter && (
+                      <p
+                        className="mt-1 text-sm font-medium"
+                        style={{ color: "var(--color-blue-700)" }}
+                      >
+                        Presenter: {item.presenter}
+                      </p>
+                    )}
                     <p
                       className="mt-3 text-sm leading-relaxed max-w-4xl"
                       style={{ color: "var(--color-primary-600)" }}
@@ -264,6 +276,15 @@ export default function WorkshopSchedule() {
                     >
                       {item.title}
                     </h3>
+
+                    {item.presenter && (
+                      <div
+                        className="mt-1 text-xs font-semibold"
+                        style={{ color: "var(--color-blue-700)" }}
+                      >
+                        Presenter: {item.presenter}
+                      </div>
+                    )}
 
                     <div
                       className="mt-1 text-xs font-medium"

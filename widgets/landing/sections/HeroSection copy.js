@@ -32,28 +32,33 @@ export default function HeroSection() {
 
         {/* Glows */}
         <div
-          className="
-            absolute -top-1/3 left-1/2 -translate-x-1/2
-            w-[420px] h-[420px]
-            sm:w-[700px] sm:h-[700px]
-            lg:w-[900px] lg:h-[900px]
-            rounded-full blur-[var(--hero-glow-blur-lg)]
-          "
+          className="absolute -top-1/3 left-1/2 -translate-x-1/2
+                     w-[420px] h-[420px]
+                     sm:w-[700px] sm:h-[700px]
+                     lg:w-[900px] lg:h-[900px]
+                     rounded-full blur-[var(--hero-glow-blur-lg)]"
           style={{ background: "var(--hero-glow-blue)" }}
         />
 
         <div
-          className="
-            absolute top-1/4 -right-1/4
-            w-[360px] h-[360px]
-            sm:w-[600px] sm:h-[600px]
-            lg:w-[700px] lg:h-[700px]
-            rounded-full blur-[var(--hero-glow-blur-lg)]
-          "
+          className="absolute top-1/4 -right-1/4
+                     w-[360px] h-[360px]
+                     sm:w-[600px] sm:h-[600px]
+                     lg:w-[700px] lg:h-[700px]
+                     rounded-full blur-[var(--hero-glow-blur-lg)]"
           style={{
             background:
               "color-mix(in srgb, var(--color-cyan-500) 20%, transparent)",
           }}
+        />
+
+        {/* Horizon */}
+        <div
+          className="absolute bottom-1/3 left-0 w-full h-px
+                     bg-gradient-to-r
+                     from-transparent
+                     via-[var(--color-blue-200)]
+                     to-transparent"
         />
       </div>
 
@@ -85,7 +90,7 @@ export default function HeroSection() {
               </span>
             </h1>
 
-            {/* DESCRIPTION */}
+            {/* DESCRIPTION – MOBILE */}
             <p
               className="
                 mt-4 text-sm leading-[1.5]
@@ -98,51 +103,32 @@ export default function HeroSection() {
             </p>
 
             {/* DESCRIPTION – DESKTOP */}
-            <p
-              className="
-                mt-8 hidden 
-                text-base 
-                leading-relaxed
-                text-[var(--color-primary-600)]
-                max-w-3xl mx-auto sm:block
-              "
-            >
-              An inaugural academic workshop addressing the strategic,
-              pedagogical, and institutional challenges of distance learning in
-              higher education. The event focuses on digital pedagogy, secure
-              online assessment, and governance models aligned with the
-              University 4.0 vision.
-            </p>
-            {/* ================= ACADEMIC NOTICE (ICON-FREE) ================= */}
-            <div
-              className="
-                mt-9
-                max-w-3xl mx-auto
-                px-5 sm:px-6 py-4
-                rounded-2xl
-                bg-white/85
-                backdrop-blur
-                border border-[var(--color-primary-200)]
-                shadow-sm
-                text-left
-                relative
-              "
-            >
-              {/* Accent line */}
+            <div className="max-w-3xl mx-auto text-center space-y-6">
+              {/* MAIN DESCRIPTION */}
+              <p
+                className="text-base sm:text-lg leading-relaxed"
+                style={{ color: "var(--text-secondary)" }}
+              >
+                This academic workshop explores the transformation of higher
+                education in the 4.0 era, focusing on distance learning,
+                pedagogical innovation, and digital assessment practices within
+                universities.
+              </p>
 
-              <div className="pl-4 sm:pl-5 space-y-1.5">
+              {/* IMPORTANT NOTE */}
+              <div
+                className="mx-auto max-w-2xl rounded-xl border px-4 py-3"
+                style={{
+                  borderColor: "var(--color-blue-300)",
+                  background: "var(--color-blue-50)",
+                }}
+              >
                 <p
-                  className="
-                    text-sm sm:text-[0.95rem]
-                    leading-relaxed
-                    text-[var(--color-primary-700)]
-                  "
+                  className="text-sm sm:text-base font-medium"
+                  style={{ color: "var(--color-blue-800)" }}
                 >
-                  <span className="font-semibold text-[var(--color-primary-800)]">
-                    Certificate of Attendance:
-                  </span>{" "}
-                  All registered faculty and students who participate in the
-                  workshop will be awarded an official certificate of
+                  All registered faculty members and students who participate in
+                  the workshop will be awarded an official certificate of
                   participation bearing their full name.
                 </p>
               </div>
@@ -151,7 +137,7 @@ export default function HeroSection() {
             {/* META */}
             <div
               className="
-                mt-8 sm:mt-9
+                mt-10 sm:mt-12
                 flex flex-col sm:flex-row flex-wrap
                 justify-center items-center
                 gap-y-3 gap-x-8
@@ -181,12 +167,9 @@ export default function HeroSection() {
 
             {/* CTAs */}
             <div
-              className="
-                mt-8 sm:mt-10
-                flex flex-col sm:flex-row
-                justify-center items-center
-                gap-4
-              "
+              className="mt-12 sm:mt-16
+                         flex flex-col sm:flex-row
+                         justify-center items-center gap-4"
             >
               <a
                 href="#registration"
@@ -202,7 +185,7 @@ export default function HeroSection() {
                   transition
                 "
               >
-                Register & Complete Survey
+                Registration & Complete Survey
               </a>
 
               <a

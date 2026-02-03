@@ -8,7 +8,12 @@ const StrategicSection = dynamic(
   () => import("../widgets/landing/sections/StrategicSection"),
   { ssr: true },
 );
-
+/* const MovingNoteSection = dynamic(
+  () => import("../widgets/landing/sections/MovingNoteSection"),
+  {
+    ssr: true,
+  },
+); */
 const UniversityTransitionSection = dynamic(
   () => import("../widgets/landing/sections/UniversityTransitionSection"),
   {
@@ -42,6 +47,7 @@ export default function Page() {
   return (
     <main>
       <HeroSection />
+      {/*    <MovingNoteSection /> */}
       <UniversityTransitionSection />
 
       <StrategicSection />

@@ -1,6 +1,11 @@
 "use client";
 
-import { FaCalendarAlt, FaMapMarkerAlt, FaUniversity } from "react-icons/fa";
+import {
+  FaCalendarAlt,
+  FaMapMarkerAlt,
+  FaUniversity,
+  FaCertificate,
+} from "react-icons/fa";
 
 export default function HeroSection() {
   return (
@@ -88,64 +93,61 @@ export default function HeroSection() {
             {/* DESCRIPTION */}
             <p
               className="
-                mt-4 text-sm leading-[1.5]
-                text-[var(--color-primary-600)]
-                max-w-[32ch] mx-auto sm:hidden
-              "
-            >
-              An academic workshop at Blida 1 University addressing distance
-              learning within the University 4.0 vision.
-            </p>
-
-            {/* DESCRIPTION – DESKTOP */}
-            <p
-              className="
-                mt-8 hidden 
-                text-base 
+                mt-8
+                text-base sm:text-lg
                 leading-relaxed
                 text-[var(--color-primary-600)]
-                max-w-3xl mx-auto sm:block
+                max-w-3xl mx-auto
               "
             >
-              An inaugural academic workshop addressing the strategic,
-              pedagogical, and institutional challenges of distance learning in
-              higher education. The event focuses on digital pedagogy, secure
-              online assessment, and governance models aligned with the
-              University 4.0 vision.
+              An inaugural academic workshop addressing the strategic and
+              pedagogical challenges of distance learning in higher education,
+              with a focus on digital pedagogy, secure online assessment, and
+              governance models aligned with the University 4.0 vision.
             </p>
-            {/* ================= ACADEMIC NOTICE (ICON-FREE) ================= */}
+
+            {/* ================= CERTIFICATE NOTICE ================= */}
             <div
               className="
-                mt-9
-                max-w-3xl mx-auto
-                px-5 sm:px-6 py-4
-                rounded-2xl
-                bg-white/85
+                mt-7 sm:mt-8
+                inline-flex items-start gap-3
+                px-4 sm:px-5 py-3
+                rounded-xl
+                bg-white/70
                 backdrop-blur
-                border border-[var(--color-primary-200)]
-                shadow-sm
+                border border-[var(--color-blue-200)]
                 text-left
-                relative
+                max-w-3xl mx-auto
+                shadow-sm
               "
             >
-              {/* Accent line */}
-
-              <div className="pl-4 sm:pl-5 space-y-1.5">
-                <p
-                  className="
-                    text-sm sm:text-[0.95rem]
-                    leading-relaxed
-                    text-[var(--color-primary-700)]
-                  "
-                >
-                  <span className="font-semibold text-[var(--color-primary-800)]">
-                    Certificate of Attendance:
-                  </span>{" "}
-                  All registered faculty and students who participate in the
-                  workshop will be awarded an official certificate of
-                  participation bearing their full name.
-                </p>
+              <div
+                className="
+                  mt-0.5
+                  flex items-center justify-center
+                  w-9 h-9
+                  rounded-full
+                  bg-[var(--color-blue-600)]
+                  text-white
+                  shrink-0
+                "
+              >
+                <FaCertificate className="text-sm" />
               </div>
+
+              <p
+                className="
+                  text-sm sm:text-[0.95rem]
+                  leading-relaxed
+                  text-[var(--color-primary-700)]
+                "
+              >
+                <span className="font-semibold text-[var(--color-primary-800)]">
+                  Certificate of Attendance:
+                </span>{" "}
+                A named certificate of attendance will be issued to all
+                registered participants upon completion of the workshop.
+              </p>
             </div>
 
             {/* META */}
