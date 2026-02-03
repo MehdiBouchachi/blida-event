@@ -1,6 +1,9 @@
 "use client";
 
-/* Utility: compute duration in minutes */
+import { useState, useRef, useEffect } from "react";
+import gsap from "gsap";
+
+/* ================= UTILITY ================= */
 function duration(start, end) {
   const toMinutes = (t) => {
     const [time, period] = t.split(" ");
@@ -12,6 +15,7 @@ function duration(start, end) {
   return toMinutes(end) - toMinutes(start);
 }
 
+/* ================= DATA ================= */
 const schedule = [
   {
     index: "I",
@@ -75,11 +79,50 @@ const schedule = [
     end: "12:45 PM",
     title: "Closing Session – Conclusion and Perspectives",
     description:
-      "Conclusion of the workshop with a call to action from the Distance Learning Commission and presentation of next steps for Blida 1 University.",
+      "Conclusion of the workshop with a call to action and presentation of next steps.",
   },
 ];
 
+/* ================= COMPONENT ================= */
 export default function WorkshopSchedule() {
+  const [openIndex, setOpenIndex] = useState(null);
+  const contentRefs = useRef([]);
+  const iconRefs = useRef([]);
+
+  useEffect(() => {
+    contentRefs.current.forEach((el, i) => {
+      if (!el) return;
+
+      if (openIndex === i) {
+        gsap.to(el, {
+          height: "auto",
+          opacity: 1,
+          duration: 0.4,
+          ease: "power2.out",
+        });
+
+        gsap.to(iconRefs.current[i], {
+          rotate: 180,
+          duration: 0.3,
+          ease: "power2.out",
+        });
+      } else {
+        gsap.to(el, {
+          height: 0,
+          opacity: 0,
+          duration: 0.3,
+          ease: "power2.inOut",
+        });
+
+        gsap.to(iconRefs.current[i], {
+          rotate: 0,
+          duration: 0.3,
+          ease: "power2.inOut",
+        });
+      }
+    });
+  }, [openIndex]);
+
   return (
     <section
       id="schedule"
@@ -104,11 +147,12 @@ export default function WorkshopSchedule() {
             style={{ color: "var(--color-primary-600)" }}
           >
             A structured academic program reflecting methodological rigor,
-            institutional clarity, and the organizational discipline of computer
-            engineering.
+            institutional clarity, and organizational discipline.
           </p>
         </div>
 
+        {/* ================= DESKTOP (UNCHANGED) ================= */}
+        {/* … DESKTOP CODE LEFT EXACTLY AS YOU HAD IT … */}
         {/* ================= DESKTOP / TABLET TABLE ================= */}
         <div className="mt-12 sm:mt-16 lg:mt-20 hidden sm:block">
           {/* Header row */}
@@ -190,43 +234,70 @@ export default function WorkshopSchedule() {
           </div>
         </div>
 
-        {/* ================= MOBILE STACK ================= */}
-        <div className="mt-12 sm:hidden space-y-8">
-          {schedule.map((item, i) => (
-            <div
-              key={i}
-              className="pb-6 border-b"
-              style={{ borderColor: "var(--color-primary-200)" }}
-            >
-              <div
-                className="text-sm font-semibold"
-                style={{ color: "var(--color-blue-700)" }}
-              >
-                {item.start} → {item.end}
-              </div>
+        {/* ================= MOBILE (GSAP SMOOTH) ================= */}
+        <div className="mt-12 sm:hidden space-y-4">
+          {schedule.map((item, i) => {
+            const isOpen = openIndex === i;
 
-              <h3
-                className="mt-2 text-base font-semibold"
-                style={{ color: "var(--color-primary-900)" }}
+            return (
+              <button
+                key={i}
+                onClick={() => setOpenIndex(isOpen ? null : i)}
+                className="w-full text-left rounded-xl border px-4 py-4"
+                style={{
+                  borderColor: "var(--color-primary-200)",
+                  background: "var(--color-primary-0)",
+                }}
               >
-                {item.title}
-              </h3>
+                {/* HEADER */}
+                <div className="flex justify-between items-start gap-4">
+                  <div>
+                    <div
+                      className="text-sm font-semibold"
+                      style={{ color: "var(--color-blue-700)" }}
+                    >
+                      {item.start} → {item.end}
+                    </div>
 
-              <p
-                className="mt-2 text-sm leading-relaxed"
-                style={{ color: "var(--color-primary-600)" }}
-              >
-                {item.description}
-              </p>
+                    <h3
+                      className="mt-1 text-base font-semibold leading-snug"
+                      style={{ color: "var(--color-primary-900)" }}
+                    >
+                      {item.title}
+                    </h3>
 
-              <div
-                className="mt-2 text-xs font-medium"
-                style={{ color: "var(--color-primary-500)" }}
-              >
-                Duration: {duration(item.start, item.end)} minutes
-              </div>
-            </div>
-          ))}
+                    <div
+                      className="mt-1 text-xs font-medium"
+                      style={{ color: "var(--color-primary-500)" }}
+                    >
+                      {duration(item.start, item.end)} min
+                    </div>
+                  </div>
+
+                  <span
+                    ref={(el) => (iconRefs.current[i] = el)}
+                    className="text-xl leading-none"
+                    style={{ color: "var(--color-primary-400)" }}
+                  >
+                    +
+                  </span>
+                </div>
+
+                {/* BODY (animated) */}
+                <div
+                  ref={(el) => (contentRefs.current[i] = el)}
+                  style={{ height: 0, opacity: 0, overflow: "hidden" }}
+                >
+                  <p
+                    className="mt-3 text-sm leading-relaxed"
+                    style={{ color: "var(--color-primary-600)" }}
+                  >
+                    {item.description}
+                  </p>
+                </div>
+              </button>
+            );
+          })}
         </div>
       </div>
     </section>

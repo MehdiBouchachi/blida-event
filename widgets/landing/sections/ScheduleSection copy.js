@@ -61,8 +61,6 @@ const schedule = [
     description:
       "Discussion on assessment design, academic integrity, technical solutions, and institutional frameworks for online examinations.",
   },
-
-  // ✅ APPENDED — nothing above changed
   {
     index: "VII",
     start: "12:00 PM",
@@ -85,33 +83,25 @@ export default function WorkshopSchedule() {
   return (
     <section
       id="schedule"
-      className="py-20 sm:py-24 lg:py-32 bg-gradient-to-b from-slate-50 to-white"
+      className="py-20 sm:py-24 lg:py-32"
+      style={{
+        background:
+          "linear-gradient(to bottom, var(--color-primary-50), var(--color-primary-0))",
+      }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* ================= HEADER ================= */}
         <div className="max-w-4xl mx-auto text-center">
           <h2
-            className="
-              text-xl
-              sm:text-2xl
-              md:text-3xl
-              lg:text-4xl
-              font-bold
-              text-slate-900
-            "
+            className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold"
+            style={{ color: "var(--color-primary-900)" }}
           >
             Workshop Schedule
           </h2>
 
           <p
-            className="
-              mt-4 sm:mt-6
-              text-sm
-              sm:text-base
-              md:text-lg
-              leading-relaxed
-              text-slate-600
-            "
+            className="mt-4 sm:mt-6 text-sm sm:text-base md:text-lg leading-relaxed"
+            style={{ color: "var(--color-primary-600)" }}
           >
             A structured academic program reflecting methodological rigor,
             institutional clarity, and the organizational discipline of computer
@@ -122,7 +112,13 @@ export default function WorkshopSchedule() {
         {/* ================= DESKTOP / TABLET TABLE ================= */}
         <div className="mt-12 sm:mt-16 lg:mt-20 hidden sm:block">
           {/* Header row */}
-          <div className="grid grid-cols-[60px_260px_1fr_90px] gap-8 pb-4 border-b border-slate-200 text-xs font-semibold uppercase tracking-wide text-slate-500">
+          <div
+            className="grid grid-cols-[60px_260px_1fr_90px] gap-8 pb-4 border-b text-xs font-semibold uppercase tracking-wide"
+            style={{
+              borderColor: "var(--color-primary-200)",
+              color: "var(--color-primary-500)",
+            }}
+          >
             <div>#</div>
             <div>Time</div>
             <div>Session</div>
@@ -130,34 +126,64 @@ export default function WorkshopSchedule() {
           </div>
 
           {/* Rows */}
-          <div className="divide-y divide-slate-200">
+          <div
+            className="divide-y"
+            style={{ borderColor: "var(--color-primary-200)" }}
+          >
             {schedule.map((item, i) => (
               <div
                 key={i}
-                className={`grid grid-cols-[60px_260px_1fr_90px] gap-8 py-8
-                  ${i % 2 === 0 ? "bg-white" : "bg-slate-50/60"}
-                  hover:bg-slate-50 transition-colors`}
+                className="grid grid-cols-[60px_260px_1fr_90px] gap-8 py-8 transition-colors"
+                style={{
+                  backgroundColor:
+                    i % 2 === 0
+                      ? "var(--color-primary-0)"
+                      : "var(--color-primary-50)",
+                }}
               >
-                <div className="text-sm font-semibold text-slate-400">
-                  {item.index}
-                </div>
+                {" "}
+                <div className="relative z-10 contents">
+                  <div
+                    className="text-sm font-semibold"
+                    style={{ color: "var(--color-primary-400)" }}
+                  >
+                    {item.index}
+                  </div>
 
-                <div className="text-sm font-semibold text-blue-700 leading-tight">
-                  <div>{item.start}</div>
-                  <div className="text-slate-400 font-medium">→ {item.end}</div>
-                </div>
+                  <div
+                    className="text-sm font-semibold leading-tight"
+                    style={{ color: "var(--color-blue-700)" }}
+                  >
+                    <div>{item.start}</div>
+                    <div
+                      className="font-medium"
+                      style={{ color: "var(--color-primary-400)" }}
+                    >
+                      → {item.end}
+                    </div>
+                  </div>
 
-                <div>
-                  <h3 className="text-base sm:text-lg font-semibold text-slate-900 tracking-tight">
-                    {item.title}
-                  </h3>
-                  <p className="mt-3 text-sm leading-relaxed text-slate-600 max-w-4xl">
-                    {item.description}
-                  </p>
-                </div>
+                  <div>
+                    <h3
+                      className="text-base sm:text-lg font-semibold tracking-tight"
+                      style={{ color: "var(--color-primary-900)" }}
+                    >
+                      {item.title}
+                    </h3>
+                    <p
+                      className="mt-3 text-sm leading-relaxed max-w-4xl"
+                      style={{ color: "var(--color-primary-600)" }}
+                    >
+                      {item.description}
+                    </p>
+                  </div>
 
-                <div className="text-sm font-medium text-slate-500">
-                  {duration(item.start, item.end)} min
+                  <div
+                    className="text-sm font-medium"
+                    style={{ color: "var(--color-primary-500)" }}
+                  >
+                    {duration(item.start, item.end)} min
+                  </div>
                 </div>
               </div>
             ))}
@@ -167,20 +193,36 @@ export default function WorkshopSchedule() {
         {/* ================= MOBILE STACK ================= */}
         <div className="mt-12 sm:hidden space-y-8">
           {schedule.map((item, i) => (
-            <div key={i} className="border-b border-slate-200 pb-6">
-              <div className="text-sm font-semibold text-blue-700">
+            <div
+              key={i}
+              className="pb-6 border-b"
+              style={{ borderColor: "var(--color-primary-200)" }}
+            >
+              <div
+                className="text-sm font-semibold"
+                style={{ color: "var(--color-blue-700)" }}
+              >
                 {item.start} → {item.end}
               </div>
 
-              <h3 className="mt-2 text-base font-semibold text-slate-900">
+              <h3
+                className="mt-2 text-base font-semibold"
+                style={{ color: "var(--color-primary-900)" }}
+              >
                 {item.title}
               </h3>
 
-              <p className="mt-2 text-sm leading-relaxed text-slate-600">
+              <p
+                className="mt-2 text-sm leading-relaxed"
+                style={{ color: "var(--color-primary-600)" }}
+              >
                 {item.description}
               </p>
 
-              <div className="mt-2 text-xs font-medium text-slate-500">
+              <div
+                className="mt-2 text-xs font-medium"
+                style={{ color: "var(--color-primary-500)" }}
+              >
                 Duration: {duration(item.start, item.end)} minutes
               </div>
             </div>
