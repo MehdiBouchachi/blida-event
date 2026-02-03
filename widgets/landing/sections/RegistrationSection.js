@@ -397,6 +397,7 @@ export default function RegistrationSection() {
           <Section title="Feedback & Suggestions">
             <Field label="Main difficulties encountered">
               <Textarea
+                disabled={isLoading}
                 value={form.difficulties}
                 onChange={(v) => setForm({ ...form, difficulties: v })}
                 inputRef={(el) => (fieldRefs.current.difficulties = el)}
@@ -406,6 +407,7 @@ export default function RegistrationSection() {
 
             <Field label="Suggested improvements">
               <Textarea
+                disabled={isLoading}
                 value={form.improvements}
                 onChange={(v) => setForm({ ...form, improvements: v })}
                 inputRef={(el) => (fieldRefs.current.improvements = el)}
@@ -418,7 +420,7 @@ export default function RegistrationSection() {
         {/* ================= NAV ================= */}
         <div className="flex justify-between pt-8 sm:pt-10 border-t">
           <button
-            disabled={step === 0}
+            disabled={step === 0 || isLoading}
             onClick={() => setStep(step - 1)}
             className=" inline-flex items-center gap-2
     px-4 py-2
@@ -736,10 +738,11 @@ function DotScale({ value, onChange, labels }) {
 // [var(--color-primary-300)]
 
 /* ================= TEXTAREA ================= */
-function Textarea({ value, onChange, inputRef, placeholder }) {
+function Textarea({ value, onChange, inputRef, placeholder, disabled }) {
   return (
     <textarea
       ref={inputRef}
+      disabled={disabled}
       rows={4}
       value={value}
       onChange={(e) => onChange(e.target.value)}
