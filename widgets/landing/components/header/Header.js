@@ -13,7 +13,7 @@ const NAV_LINKS = [
   { label: "Strategic Vision", href: "#strategy" },
   { label: "University 4.0", href: "#university-4" },
   { label: "Schedule", href: "#schedule" },
-  { label: "Registration", href: "#registration" },
+ 
 ];
 
 export default function Header() {
@@ -137,7 +137,7 @@ export default function Header() {
              text-sm font-semibold
              hover:bg-[var(--color-blue-700)] transition"
             >
-              Pre-Register
+              Registration
             </a>
 
             {/* Mobile menu button */}

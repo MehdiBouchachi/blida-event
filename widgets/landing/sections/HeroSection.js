@@ -185,7 +185,7 @@ export default function HeroSection() {
                   transition
                 "
               >
-                Pre-Register & Complete Survey
+                Registration & Complete Survey
               </a>
 
               <a
