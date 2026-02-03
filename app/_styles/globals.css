@@ -1,0 +1,207 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =====================================================
+   DESIGN SYSTEM (HEX ONLY — NO TAILWIND COLORS)
+   ===================================================== */
+
+/* ================= LIGHT MODE ================= */
+:root {
+  /* ---------- BRAND ---------- */
+  --brand-500: #185acc;
+  --brand-600: #1246a5;
+  --brand-soft: #dce8fa;
+
+  /* ---------- ACCENTS ---------- */
+  --accent-cyan: #2ec4d8;
+  --accent-emerald: #28b485;
+  --accent-indigo: #5850ec;
+
+  /* ---------- SURFACES ---------- */
+  --surface-page: #ffffff;
+  --surface-section: #f7f9fc;
+  --surface-card: #ffffff;
+  --surface-muted: #f1f5f9;
+
+  /* ---------- TEXT ---------- */
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #64748b;
+  --text-inverse: #ffffff;
+
+  /* ---------- BORDERS ---------- */
+  --border-default: #e2e8f0;
+  --border-strong: #cbd5e1;
+
+  /* ---------- SHADOWS ---------- */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.12);
+  --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.18);
+
+  /* ---------- MOTION ---------- */
+  --motion-fast: 150ms;
+  --motion-base: 220ms;
+  --motion-slow: 320ms;
+
+  /* ---------- INTERACTION ---------- */
+  --hover-overlay-soft: rgba(24, 90, 204, 0.06);
+  --hover-overlay-medium: rgba(24, 90, 204, 0.12);
+
+  --focus-ring: 0 0 0 3px rgba(24, 90, 204, 0.25);
+
+
+  --hero-grid-line: rgba(24, 90, 204, 0.06);
+
+  --hero-glow-primary: rgba(24, 90, 204, 0.12);
+  --hero-glow-secondary: rgba(46, 196, 216, 0.12);
+
+  --hero-horizon-line: #bfdbfe;
+}
+
+/* ================= DARK MODE ================= */
+.dark {
+
+    --hero-grid-line: rgba(96, 165, 250, 0.12);
+
+  --hero-glow-primary: rgba(96, 165, 250, 0.18);
+  --hero-glow-secondary: rgba(46, 196, 216, 0.16);
+
+  --hero-horizon-line: #334155;
+  /* ---------- BRAND ---------- */
+  --brand-500: #60a5fa;
+  --brand-600: #3b82f6;
+  --brand-soft: #1e3a8a;
+
+  /* ---------- SURFACES ---------- */
+  --surface-page: #020617;
+  --surface-section: #0f172a;
+  --surface-card: #0f172a;
+  --surface-muted: #1e293b;
+
+  /* ---------- TEXT ---------- */
+  --text-primary: #f1f5f9;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
+  --text-inverse: #020617;
+
+  /* ---------- BORDERS ---------- */
+  --border-default: #334155;
+  --border-strong: #475569;
+
+  /* ---------- SHADOWS ---------- */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 8px 20px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.6);
+  --shadow-xl: 0 30px 60px rgba(0, 0, 0, 0.7);
+
+  --hover-overlay-soft: rgba(96, 165, 250, 0.08);
+  --hover-overlay-medium: rgba(96, 165, 250, 0.16);
+
+  --focus-ring: 0 0 0 3px rgba(96, 165, 250, 0.35);
+}
+
+/* =====================================================
+   SEMANTIC UTILITIES
+   ===================================================== */
+
+.bg-page {
+  background-color: var(--surface-page);
+}
+
+.bg-section {
+  background-color: var(--surface-section);
+}
+
+.bg-card {
+  background-color: var(--surface-card);
+}
+
+.text-primary {
+  color: var(--text-primary);
+}
+
+.text-secondary {
+  color: var(--text-secondary);
+}
+
+.border-default {
+  border-color: var(--border-default);
+}
+
+.shadow-card {
+  box-shadow: var(--shadow-sm);
+}
+
+.shadow-elevated {
+  box-shadow: var(--shadow-lg);
+}
+
+/* =====================================================
+   HOVER & INTERACTION SYSTEM
+   ===================================================== */
+
+.hover-lift {
+  transition:
+    transform var(--motion-base) ease,
+    box-shadow var(--motion-base) ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.hover-brand {
+  transition:
+    background-color var(--motion-base) ease,
+    box-shadow var(--motion-base) ease,
+    transform var(--motion-base) ease;
+}
+
+.hover-brand:hover {
+  box-shadow: 0 12px 30px rgba(24, 90, 204, 0.35);
+  transform: translateY(-1px);
+}
+
+.dark .hover-brand:hover {
+  box-shadow: 0 12px 30px rgba(96, 165, 250, 0.35);
+}
+
+.hover-ghost {
+  transition:
+    background-color var(--motion-fast) ease,
+    border-color var(--motion-fast) ease,
+    color var(--motion-fast) ease;
+}
+
+.hover-ghost:hover {
+  background-color: var(--hover-overlay-soft);
+  border-color: var(--brand-500);
+}
+
+.hover-underline {
+  position: relative;
+}
+
+.hover-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0;
+  height: 1px;
+  background-color: var(--brand-500);
+  transition: width var(--motion-base) ease;
+}
+
+.hover-underline:hover::after {
+  width: 100%;
+}
+
+.focus-ring:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+  border-radius: 0.75rem;
+}

@@ -1,0 +1,40 @@
+import Image from "next/image";
+import logo from "../../public/logo.png";
+
+export default function Logo() {
+  return (
+    <div className="flex items-center gap-3 sm:gap-3.5 md:gap-4 min-w-0">
+      <Image
+        src={logo}
+        width={60}
+        height={60}
+        sizes="(min-width: 1024px) 56px, (min-width: 768px) 54px, 52px"
+        className="
+          rounded-full
+          flex-shrink-0
+          w-[52px] h-[52px]
+          sm:w-[54px] sm:h-[54px]
+          lg:w-14 lg:h-14
+        "
+        alt="Blida 1 University logo"
+        priority
+      />
+
+      <div className="leading-tight min-w-0">
+        <div
+          className="
+            font-semibold
+            tracking-tight
+            text-[var(--text-primary)]
+            whitespace-nowrap
+            text-[1.05rem]
+            sm:text-[1.1rem]
+            lg:text-lg
+          "
+        >
+          Blida 1 University
+        </div>
+      </div>
+    </div>
+  );
+}
