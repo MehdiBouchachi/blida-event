@@ -49,8 +49,8 @@ export default async function RootLayout({ children }) {
         className={[
           josefin.className,
           "antialiased min-h-svh overflow-x-hidden flex flex-col",
-          "bg-[var(--surface-0)] text-[var(--text-primary)]",
-          "selection:bg-[rgba(24,90,204,0.35)]",
+          "bg-[var(--primary-0)] text-[var(--primary-700)]",
+          "selection:bg-[rgba(24,90,204,0.35)] selection:text-[var(--color-primary-800)]",
         ].join(" ")}
       >
         {" "}

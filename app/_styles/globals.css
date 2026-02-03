@@ -1,8 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html,* {
+  scroll-behavior: smooth;
+}
+
 :root {
   /* ================= PRIMARY (Slate) ================= */
+  --color-primary-0: #ffffff;
   --color-primary-50: #f8fafc;
   --color-primary-100: #f1f5f9;
   --color-primary-200: #e2e8f0;
@@ -47,6 +53,13 @@
   --color-indigo-50: #eef2ff; /* bg-indigo-50 */
   --color-indigo-600: #4f46e5; /* text-indigo-600 */
 
+  --color-red-500: #ef4444; /* text-red-500 */
+
+  /* Green */
+  --color-green-500: #22c55e; /* bg-green-500 */
+  --color-green-600: #16a34a; /* bg-green-600 */
+  --color-green-700: #15803d; /* bg-green-700 */
+
   /* ================= SHADOWS ================= */
   --shadow-xs: 0 1px 1px rgba(15, 23, 42, 0.04);
   --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.06);
@@ -61,65 +74,23 @@
   --hero-glow-blur-lg: 140px;
   --hero-glow-blur-md: 100px;
 }
-html.dark {
-  /* ================= PRIMARY (Slate – Dark) ================= */
-  --color-primary-50: #020617;
-  --color-primary-100: #020617;
-  --color-primary-200: #020617;
-  --color-primary-300: #1e293b;
-  --color-primary-400: #334155;
-  --color-primary-500: #475569;
-  --color-primary-600: #64748b;
-  --color-primary-700: #94a3b8;
-  --color-primary-800: #cbd5e1;
-  --color-primary-900: #e5e7eb;
 
-  /* ================= BRAND (Dark) ================= */
-  --color-brand-50: #0b1224;
-  --color-brand-100: #111a33;
-  --color-brand-200: #1a2752;
-  --color-brand-300: #24357a;
-  --color-brand-400: #2f45a3;
-  --color-brand-500: #4f7cff; /* SAME main brand */
-  --color-brand-600: #6a92ff;
-  --color-brand-700: #8fb0ff;
-  --color-brand-800: #b7ccff;
-  --color-brand-900: #dde6ff;
+.schedule-row {
+  background-color: var(--row-bg);
+}
 
-  /* ================= STATIC BLUE (unchanged) ================= */
-  --color-blue-50: #eff6ff;
-  --color-blue-100: #dbeafe;
-  --color-blue-200: #bfdbfe;
-  --color-blue-300: #93c5fd;
-  --color-blue-400: #60a5fa;
-  --color-blue-500: #3b82f6;
-  --color-blue-600: #2563eb;
-  --color-blue-700: #1d4ed8;
-  --color-blue-800: #1e40af;
-  --color-blue-900: #1e3a8a;
+/* default states */
+.schedule-row[data-tone="0"] {
+  --row-bg: var(--color-primary-0);
+}
+.schedule-row[data-tone="50"] {
+  --row-bg: var(--color-primary-50);
+}
 
-  --color-cyan-500: #06b6d4;
-
-  /* ================= EMERALD ================= */
-  --color-emerald-50: #062e1f;
-  --color-emerald-600: #10b981;
-  --color-emerald-700: #34d399;
-
-  /* ================= INDIGO ================= */
-  --color-indigo-50: #0b1025;
-  --color-indigo-600: #6366f1;
-
-  /* ================= SHADOWS (Dark) ================= */
-  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.5);
-  --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.55);
-  --shadow-md: 0 8px 20px rgba(0, 0, 0, 0.6);
-  --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.65);
-  --shadow-xl: 0 30px 80px rgba(0, 0, 0, 0.7);
-
-  /* ================= HERO GLOWS (Dark Neon) ================= */
-  --hero-glow-brand: rgba(79, 124, 255, 0.45);
-  --hero-glow-blue: rgba(59, 130, 246, 0.4);
-
-  --hero-glow-blur-lg: 180px;
-  --hero-glow-blur-md: 130px;
+/* hover swap */
+.schedule-row[data-tone="0"]:hover {
+  --row-bg: var(--color-blue-50);
+}
+.schedule-row[data-tone="50"]:hover {
+  --row-bg: var(--color-blue-50);
 }

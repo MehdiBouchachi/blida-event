@@ -89,23 +89,24 @@ export default function Header() {
     );
   };
 
+
   return (
     <>
       {/* ================= HEADER ================= */}
       <header
         className={`fixed inset-x-0 top-0 z-50 transition-all duration-300
-          ${hidden ? "-translate-y-full" : "translate-y-0"}
-          ${
-            scrolled
-              ? "bg-white/90 backdrop-blur border-b border-slate-200"
-              : "bg-transparent"
-          }`}
+    ${hidden ? "-translate-y-full" : "translate-y-0"}
+    ${
+      scrolled
+        ? "bg-[rgba(255,255,255,0.9)] backdrop-blur border-b border-[var(--color-primary-200)]"
+        : "bg-transparent"
+    }`}
       >
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
           {/* LEFT */}
-          <Link href="/" className="flex items-center gap-3">
+          <a href="/" className="flex items-center gap-3">
             <Logo />
-          </Link>
+          </a>
 
           {/* CENTER – DESKTOP NAV */}
           <nav className="hidden md:flex items-center gap-8">
@@ -113,11 +114,13 @@ export default function Header() {
               <a
                 key={item.href}
                 href={item.href}
-                className="relative text-[15px] font-medium text-slate-700
-                           hover:text-blue-600 transition
-                           after:absolute after:left-0 after:-bottom-1
-                           after:h-px after:w-0 after:bg-blue-600
-                           after:transition-all hover:after:w-full"
+                className="relative text-[15px] font-medium
+             text-[var(--color-primary-700)]
+             hover:text-[var(--color-blue-600)] transition
+             after:absolute after:left-0 after:-bottom-1
+             after:h-px after:w-0
+             after:bg-[var(--color-blue-600)]
+             after:transition-all hover:after:w-full"
               >
                 {item.label}
               </a>
@@ -126,15 +129,13 @@ export default function Header() {
 
           {/* RIGHT */}
           <div className="flex items-center gap-3">
-            {/*  <ThemeToggle /> */}
-
             {/* Desktop CTA */}
             <a
               href="#registration"
               className="hidden md:inline-flex px-4 py-2 rounded-lg
-                         bg-blue-600 text-white
-                         text-sm font-semibold
-                         hover:bg-blue-700 transition"
+             bg-[var(--color-blue-600)] text-white
+             text-sm font-semibold
+             hover:bg-[var(--color-blue-700)] transition"
             >
               Pre-Register
             </a>
@@ -142,7 +143,9 @@ export default function Header() {
             {/* Mobile menu button */}
             <button
               onClick={() => setMenuOpen(true)}
-              className="md:hidden p-2 text-slate-700 hover:text-blue-600 transition"
+              className="md:hidden p-2
+             text-[var(--color-primary-700)]
+             hover:text-[var(--color-blue-600)] transition"
               aria-label="Open menu"
             >
               <FiMenu size={26} />
@@ -165,11 +168,14 @@ export default function Header() {
           <div
             ref={panelRef}
             className="absolute top-0 right-0 h-full w-full max-w-sm
-                       bg-white shadow-2xl
-                       flex flex-col"
+             bg-[var(--color-primary-50)] shadow-2xl
+             flex flex-col"
           >
             {/* TOP BAR */}
-            <div className="h-16 px-6 flex items-center justify-between border-b border-slate-200">
+            <div
+              className="h-16 px-6 flex items-center justify-between
+                border-b border-[var(--color-primary-200)]"
+            >
               <Logo />
 
               <button
@@ -190,8 +196,8 @@ export default function Header() {
                       href={item.href}
                       onClick={closeMenu}
                       className="block text-[17px] font-medium
-                                 text-slate-800
-                                 hover:text-blue-600 transition"
+             text-[var(--color-primary-800)]
+             hover:text-[var(--color-blue-600)] transition"
                     >
                       {item.label}
                     </a>
@@ -206,10 +212,10 @@ export default function Header() {
                 href="#registration"
                 onClick={closeMenu}
                 className="block w-full text-center
-                           py-3 rounded-xl
-                           bg-blue-600 text-white
-                           text-sm font-semibold
-                           hover:bg-blue-700 transition"
+             py-3 rounded-xl
+             bg-[var(--color-blue-600)] text-white
+             text-sm font-semibold
+             hover:bg-[var(--color-blue-700)] transition"
               >
                 Pre-Register
               </a>

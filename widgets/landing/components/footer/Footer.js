@@ -1,95 +1,122 @@
 "use client";
 
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
 import logo from "../../../../public/logo.png";
+
+const NAV_LINKS = [
+  { label: "Workshop Objectives", href: "#objectives" },
+  { label: "Strategic Vision", href: "#strategy" },
+  { label: "University 4.0", href: "#university-4" },
+  { label: "Schedule", href: "#schedule" },
+  { label: "Registration", href: "#registration" },
+];
 
 export default function Footer() {
   return (
-    <footer className="bg-slate-50 border-t border-slate-200">
-      <div className="max-w-7xl mx-auto px-6 py-24">
-        {/* ================= GRID ================= */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-24">
-          {/* ================= LEFT ================= */}
-          <div className="space-y-6 max-w-sm">
-            <div className="flex items-center gap-3">
+    <footer
+      className="border-t"
+      style={{
+        borderColor: "var(--color-primary-200)",
+        background:
+          "linear-gradient(to top, var(--color-primary-100), var(--color-primary-50))",
+      }}
+    >
+      {/* ================= MAIN ================= */}
+      <div className="max-w-7xl mx-auto px-6 pt-24 pb-16">
+        <div className="flex flex-col md:flex-row justify-between gap-16">
+          {/* ================= LEFT / BRAND ================= */}
+          <div className="max-w-sm space-y-7">
+            <div className="flex items-center gap-4">
               <Image
                 src={logo}
-                width={44}
-                height={44}
+                width={48}
+                height={48}
                 alt="Blida 1 University"
-                className="rounded-full"
               />
-              <span className="text-lg font-semibold text-slate-900">
-                Blida 1 University
-              </span>
+              <div>
+                <div
+                  className="text-lg font-semibold"
+                  style={{ color: "var(--color-primary-900)" }}
+                >
+                  Blida 1 University
+                </div>
+              </div>
             </div>
 
-            <p className="text-sm leading-relaxed text-slate-600">
-              An academic initiative led by the EAD Commission to support the
-              transition toward sustainable distance learning, digital pedagogy,
-              and institutional innovation at Blida 1 University.
+            <p
+              className="text-sm leading-relaxed"
+              style={{ color: "var(--color-primary-600)" }}
+            >
+              Academic initiative led by the EAD Commission to support the
+              University 4.0 transition through sustainable distance learning,
+              digital pedagogy, and institutional innovation.
             </p>
           </div>
 
-          {/* ================= CENTER ================= */}
-          <div className="space-y-6 max-w-sm">
-            <h4 className="text-sm font-semibold uppercase tracking-wider text-slate-900">
-              Sections
+          {/* ================= CENTER / NAVIGATION ================= */}
+          <div className="min-w-[220px] space-y-8 text-left">
+            <h4
+              className="text-xs font-semibold uppercase tracking-widest"
+              style={{ color: "var(--color-primary-800)" }}
+            >
+              Navigation
             </h4>
 
-            <ul className="space-y-3 text-sm">
-              {[
-                { label: "Workshop Objectives", href: "#objectives" },
-                { label: "Strategic Vision", href: "#strategy" },
-                { label: "University 4.0", href: "#university-4" },
-                { label: "Schedule", href: "#schedule" },
-                { label: "Registration", href: "#registration" },
-              ].map((item) => (
-                <li key={item.label}>
-                  <Link
+            <ul className="space-y-4 text-sm">
+              {NAV_LINKS.map((item) => (
+                <li key={item.href}>
+                  <a href={item.href} className="transition-colors"
                     href={item.href}
-                    className="group inline-flex text-slate-600 hover:text-blue-600 transition-colors"
-                  >
-                    <span className="relative">
+                    
+                    style={{ color: "var(--color-primary-700)" }}
+                 >
+                    <span className="transition-colors duration-200 group-hover:text-[var(--color-blue-600)]">
                       {item.label}
-                      <span className="absolute left-0 -bottom-0.5 h-px w-0 bg-blue-600 transition-all duration-300 group-hover:w-full" />
                     </span>
-                  </Link>
+                  </a>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* ================= RIGHT ================= */}
-          <div className="space-y-6 max-w-sm">
-            <h4 className="text-sm font-semibold uppercase tracking-wider text-slate-900">
+          {/* ================= RIGHT / CONTACT ================= */}
+          <div className="max-w-sm space-y-7 text-left">
+            <h4
+              className="text-xs font-semibold uppercase tracking-widest"
+              style={{ color: "var(--color-primary-800)" }}
+            >
               Contact
             </h4>
 
-            <p className="text-sm text-slate-600">
-              For academic or organizational inquiries:
+            <p
+              className="text-sm leading-relaxed"
+              style={{ color: "var(--color-primary-600)" }}
+            >
+              Academic & organizational inquiries
             </p>
 
             <a
               href="mailto:ead_univblida1@univ-blida.dz"
-              className="group inline-flex text-sm font-medium text-blue-600 hover:text-blue-700 transition-colors"
+              className="text-sm font-medium"
+              style={{ color: "var(--color-blue-600)" }}
             >
-              <span className="relative">
-                ead_univblida1@univ-blida.dz
-                <span className="absolute left-0 -bottom-0.5 h-px w-0 bg-blue-600 transition-all duration-300 group-hover:w-full" />
-              </span>
+              ead_univblida1@univ-blida.dz
             </a>
           </div>
         </div>
+      </div>
 
-        {/* ================= BOTTOM BAR ================= */}
-        <div className="mt-24 pt-6 border-t border-slate-200 flex flex-col md:flex-row items-center justify-between text-xs text-slate-500 gap-4">
-          <span>
+      {/* ================= BOTTOM ================= */}
+      <div
+        className="border-t"
+        style={{ borderColor: "var(--color-primary-200)" }}
+      >
+        <div className="max-w-7xl mx-auto px-6 py-6 flex flex-col md:flex-row justify-between gap-4 text-xs">
+          <span style={{ color: "var(--color-primary-500)" }}>
             © {new Date().getFullYear()} Blida 1 University — Distance Learning
           </span>
-
-          <span className="text-slate-400">
+          <span style={{ color: "var(--color-primary-500)" }}>
             Faculty of Sciences & Technologies
           </span>
         </div>

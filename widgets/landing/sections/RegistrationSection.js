@@ -170,11 +170,11 @@ export default function RegistrationSection() {
     >
       {/* ================= HEADER ================= */}
       <div className="max-w-4xl mx-auto text-center mb-12 sm:mb-16 lg:mb-20">
-        <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 tracking-tight">
+        <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-[var(--color-primary-900)] tracking-tight">
           Workshop Pre-Registration
         </h2>
 
-        <p className="mt-4 sm:mt-6 text-sm sm:text-base md:text-lg leading-relaxed text-slate-600">
+        <p className="mt-4 sm:mt-6 text-sm sm:text-base md:text-lg leading-relaxed text-[var(--color-primary-600)]">
           This form collects structured academic data to support institutional
           evaluation, digital transformation planning, and evidence-based
           decision-making in the distance learning blida 1 strategy.
@@ -184,7 +184,7 @@ export default function RegistrationSection() {
       <Stepper step={step} />
 
       {/* ================= FORM CARD ================= */}
-      <div className="bg-white rounded-2xl border border-slate-200 shadow-sm px-5 sm:px-8 md:px-12 py-8 sm:py-10 md:py-12 space-y-12 sm:space-y-14">
+      <div className="bg-[var(--color-primary-0)] rounded-2xl border border-[var(--color-primary-200)] shadow-sm px-5 sm:px-8 md:px-12 py-8 sm:py-10 md:py-12 space-y-12 sm:space-y-14">
         {step === 0 && (
           <Section title="Participant Information">
             <Field label="Full Name" required>
@@ -380,7 +380,7 @@ export default function RegistrationSection() {
           <button
             disabled={step === 0}
             onClick={() => setStep(step - 1)}
-            className="text-sm font-medium text-slate-500 hover:text-slate-800 disabled:opacity-40"
+            className="text-sm font-medium text-[var(--color-primary-500)] hover:text-[var(--color-primary-800)] disabled:opacity-40"
           >
             Back
           </button>
@@ -397,7 +397,7 @@ export default function RegistrationSection() {
                 setStep(nextStep);
                 scrollToFirstField(nextStep);
               }}
-              className="px-6 sm:px-8 py-2.5 rounded-lg bg-blue-600 text-white text-sm font-semibold hover:bg-blue-700 transition"
+              className="px-6 sm:px-8 py-2.5 rounded-lg bg-[var(--color-blue-600)] text-[var(--color-primary-0)] text-sm font-semibold hover:bg-[var(--color-blue-700)] transition"
             >
               Continue
             </button>
@@ -405,7 +405,7 @@ export default function RegistrationSection() {
             <button
               onClick={handleSubmit}
               disabled={isLoading}
-              className="px-6 sm:px-8 py-2.5 rounded-lg bg-green-600 text-white text-sm font-semibold hover:bg-green-700 disabled:opacity-50"
+              className="px-6 sm:px-8 py-2.5 rounded-lg bg-[var(--color-green-600)] text-[var(--color-primary-0)] text-sm font-semibold hover:bg-[var(--color-green-700)] disabled:opacity-50"
             >
               {isLoading ? "Submitting..." : "Submit Registration"}
             </button>
@@ -431,7 +431,7 @@ export default function RegistrationSection() {
 function Stepper({ step }) {
   return (
     <div className="relative mb-12 sm:mb-16">
-      <div className="absolute top-4 left-0 right-0 h-px bg-slate-200" />
+      <div className="absolute top-4 left-0 right-0 h-px bg-[var(--color-primary-200)]" />
       <div className="flex justify-between relative">
         {STEPS.map((s, i) => (
           <div key={s.id} className="flex flex-col items-center flex-1">
@@ -439,15 +439,17 @@ function Stepper({ step }) {
               className={`w-9 h-9 rounded-full flex items-center justify-center text-sm font-semibold
                 ${
                   i <= step
-                    ? "bg-blue-600 text-white"
-                    : "bg-white border border-slate-300 text-slate-400"
+                    ? "bg-[var(--color-blue-600)] text-[var(--color-primary-0)]"
+                    : "bg-[var(--color-primary-0)] border border-[var(--color-primary-300)] text-[var(--color-primary-400)]"
                 }`}
             >
               {s.id}
             </div>
             <span
               className={`mt-4 text-xs sm:text-sm text-center ${
-                i === step ? "font-medium text-slate-900" : "text-slate-500"
+                i === step
+                  ? "font-medium text-[var(--color-primary-900)]"
+                  : "text-[var(--color-primary-500)]"
               }`}
             >
               {s.label}
@@ -467,7 +469,7 @@ function Section({ title, children }) {
           text-base
           sm:text-lg
           font-semibold
-          text-slate-900
+          text-[var(--color-primary-900)]
           border-b
           pb-3
         "
@@ -485,14 +487,15 @@ function SubSection({ title, children }) {
     <div
       className="
         rounded-xl
-        border border-slate-200
-        bg-slate-50/40
+        border border-[var(--color-primary-200)]
+        bg-[color-mix(in_srgb,var(--color-primary-50)_40%,transparent)]
+
         px-4 sm:px-6
         py-6 sm:py-8
         space-y-6 sm:space-y-8
       "
     >
-      <h4 className="text-sm sm:text-base font-semibold text-slate-900">
+      <h4 className="text-sm sm:text-base font-semibold text-[var(--color-primary-900)]">
         {title}
       </h4>
       {children}
@@ -504,9 +507,11 @@ function SubSection({ title, children }) {
 function Field({ label, required, children }) {
   return (
     <div className="space-y-2 sm:space-y-3">
-      <label className="block text-sm sm:text-base font-semibold text-slate-900">
+      <label className="block text-sm sm:text-base font-semibold text-[var(--color-primary-900)]">
         {label}
-        {required && <span className="text-red-500 ml-1">*</span>}
+        {required && (
+          <span className="text-[var(--color-red-500)] ml-1">*</span>
+        )}
       </label>
       {children}
     </div>
@@ -525,10 +530,11 @@ function Input({ value, onChange, type = "text", inputRef }) {
         w-full
         h-11 sm:h-12
         rounded-lg
-        border border-slate-300
+        border border-[var(--color-primary-300)]
         px-4
         text-sm sm:text-base
-        focus:ring-2 focus:ring-blue-500
+        focus:ring-2 focus:ring-[var(--color-blue-500)]
+
         outline-none
       "
     />
@@ -546,11 +552,12 @@ function Select({ value, onChange, options, inputRef }) {
         w-full
         h-11 sm:h-12
         rounded-lg
-        border border-slate-300
+        border border-[var(--color-primary-300)]
         px-4
         text-sm sm:text-base
-        bg-white
-        focus:ring-2 focus:ring-blue-500
+        bg-[var(--color-primary-0)]
+        focus:ring-2 focus:ring-[var(--color-blue-500)]
+
         outline-none
       "
     >
@@ -568,31 +575,38 @@ function Select({ value, onChange, options, inputRef }) {
 function CheckboxGroup({ options, values, onToggle }) {
   return (
     <div className="grid gap-3 sm:gap-4 sm:grid-cols-2">
-      {options.map((o) => (
-        <label
-          key={o}
-          className="
-            flex items-start
-            gap-3
-            p-3
-            rounded-lg
-            border border-slate-200
-            text-sm sm:text-base
-            font-medium
-            text-slate-800
-            cursor-pointer
-            active:bg-slate-100
-          "
-        >
-          <input
-            type="checkbox"
-            checked={values.includes(o)}
-            onChange={() => onToggle(o)}
-            className="mt-1 w-4 h-4 accent-blue-600"
-          />
-          <span className="leading-snug">{o}</span>
-        </label>
-      ))}
+      {options.map((o) => {
+        const checked = values.includes(o);
+
+        return (
+          <label
+            key={o}
+            className={[
+              "relative flex items-start gap-3 p-3 rounded-lg border",
+              "cursor-pointer transition-colors",
+              "text-sm sm:text-base font-medium",
+              checked
+                ? "border-[var(--color-blue-600)] bg-[var(--color-blue-50)]"
+                : "border-[var(--color-primary-200)] hover:bg-[var(--color-primary-50)]",
+            ].join(" ")}
+          >
+            {/* REAL INPUT (SAFE) */}
+            <input
+              type="checkbox"
+              checked={checked}
+              onChange={() => onToggle(o)}
+              className="mt-1 w-4 h-4 accent-[var(--color-blue-600)]"
+            />
+
+            <span
+              className="leading-snug"
+              style={{ color: "var(--color-primary-800)" }}
+            >
+              {o}
+            </span>
+          </label>
+        );
+      })}
     </div>
   );
 }
@@ -600,7 +614,13 @@ function CheckboxGroup({ options, values, onToggle }) {
 /* ================= DOT SCALE ================= */
 function DotScale({ value, onChange, labels }) {
   return (
-    <div className="space-y-3">
+    <div
+      className="
+        flex flex-col
+        sm:flex-row sm:items-center sm:gap-6
+      "
+    >
+      {/* DOTS */}
       <div className="flex items-center gap-5">
         {[1, 2, 3, 4, 5].map((n) => (
           <button
@@ -611,23 +631,34 @@ function DotScale({ value, onChange, labels }) {
             className={`
               w-5 h-5
               rounded-full
-              transition
+              transition-transform transition-colors
               ${
                 n <= value
-                  ? "bg-blue-600 scale-110"
-                  : "bg-slate-300 active:bg-slate-400"
+                  ? "bg-[var(--color-blue-600)] scale-110"
+                  : "bg-[var(--color-primary-300)] hover:bg-[var(--color-primary-400)]"
               }
             `}
           />
         ))}
       </div>
 
-      <span className="block text-sm font-medium text-slate-700">
+      {/* LABEL */}
+      <span
+        className="
+          mt-2
+          sm:mt-0
+          text-sm font-medium
+          text-[var(--color-primary-700)]
+          whitespace-nowrap
+        "
+      >
         {labels[value - 1]}
       </span>
     </div>
   );
 }
+
+// [var(--color-primary-300)]
 
 /* ================= TEXTAREA ================= */
 function Textarea({ value, onChange, inputRef }) {
@@ -640,10 +671,11 @@ function Textarea({ value, onChange, inputRef }) {
       className="
         w-full
         rounded-lg
-        border border-slate-300
+        border border-[var(--color-primary-300)]
         px-4 py-3
         text-sm sm:text-base
-        focus:ring-2 focus:ring-blue-500
+        focus:ring-2 focus:ring-[var(--color-blue-500)]
+
         outline-none
         resize-none
       "

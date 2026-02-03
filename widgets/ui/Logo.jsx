@@ -6,8 +6,8 @@ export default function Logo() {
     <div className="flex items-center gap-3 sm:gap-3.5 md:gap-4 min-w-0">
       <Image
         src={logo}
-        width={60}
-        height={60}
+        width={56}
+        height={56}
         sizes="(min-width: 1024px) 56px, (min-width: 768px) 54px, 52px"
         className="
           rounded-full

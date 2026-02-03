@@ -61,7 +61,7 @@ export default function RegistrationSuccess({ open, onClose }) {
         {/* Title */}
         <h3
           ref={(el) => (itemsRef.current[0] = el)}
-          className="text-lg sm:text-xl font-semibold text-slate-900"
+          className="text-lg sm:text-xl font-semibold text-[var(--color-primary-900)]"
         >
           Registration Successful
         </h3>
@@ -69,7 +69,7 @@ export default function RegistrationSuccess({ open, onClose }) {
         {/* Message */}
         <p
           ref={(el) => (itemsRef.current[1] = el)}
-          className="text-sm sm:text-base text-slate-600 leading-relaxed"
+          className="text-sm sm:text-base text-[var(--color-primary-600)] leading-relaxed"
         >
           Thank you for your participation. Your responses have been
           successfully recorded and will contribute to institutional analysis
