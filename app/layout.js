@@ -12,6 +12,12 @@ const Header = dynamic(
     ssr: false,
   },
 );
+const ScrollToTop = dynamic(
+  () => import("../widgets/landing/components/ScrollToTop"),
+  {
+    ssr: false,
+  },
+);
 const Footer = dynamic(
   () => import("../widgets/landing/components/footer/Footer"),
   {
@@ -66,6 +72,7 @@ export default async function RootLayout({ children }) {
           <main className="flex-1">
             <ForceHeroOnReload heroSelector="#hero" />
             {children}
+            <ScrollToTop />
           </main>
           <Footer />
         </div>
