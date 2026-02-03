@@ -59,7 +59,7 @@ export default function HeroSection() {
 
       {/* ================= CONTENT ================= */}
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="min-h-[calc(100svh-72px)] flex items-center justify-center pt-16 sm:pt-20">
+        <div className="min-h-[calc(100svh-72px)] flex items-center justify-center pt-20 sm:pt-24">
           <div className="max-w-4xl text-center">
             {/* TITLE */}
             <h1
@@ -134,19 +134,25 @@ export default function HeroSection() {
                 <p
                   className="
                     text-sm sm:text-[0.95rem]
-                    leading-relaxed
+                    sm:leading-relaxed
+                    max-w-[36ch]
+                    leading-[1.8]
                     text-[var(--color-primary-700)]
                   "
                 >
                   <span className="font-semibold text-[var(--color-primary-800)]">
                     Certificate of Attendance:
                   </span>{" "}
-                  All registered faculty and students who participate in the
-                  workshop will be awarded an official certificate of
-                  participation bearing their full name.
+                  A named certificate of attendance will be issued to all registered participants upon completion of the workshop.
                 </p>
+
+                
               </div>
             </div>
+
+          
+
+
 
             {/* META */}
             <div

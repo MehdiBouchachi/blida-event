@@ -280,7 +280,7 @@ export default function WorkshopSchedule() {
                     {item.presenter && (
                       <div
                         className="mt-1 text-xs font-semibold"
-                        style={{ color: "var(--color-blue-700)" }}
+                        style={{ color: "var(--color-emerald-600)" }}
                       >
                         Presenter: {item.presenter}
                       </div>
