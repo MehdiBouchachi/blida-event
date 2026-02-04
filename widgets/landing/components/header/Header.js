@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Link from "next/link";
 import { FiMenu, FiX } from "react-icons/fi";
 import { gsap } from "gsap";
 
@@ -22,6 +21,8 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState(null);
+  const [heroVisible, setHeroVisible] = useState(true);
 
   const lastScrollY = useRef(0);
   const panelRef = useRef(null);
@@ -70,6 +71,55 @@ export default function Header() {
 
     return () => tl.kill();
   }, [menuOpen]);
+  useEffect(() => {
+    const sections = NAV_LINKS.map((link) =>
+      document.querySelector(link.href),
+    ).filter(Boolean);
+
+    if (!sections.length) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !heroVisible) {
+            setActiveSection(`#${entry.target.id}`);
+          }
+        });
+      },
+      {
+        root: null,
+        rootMargin: "-35% 0px -55% 0px",
+        threshold: 0,
+      },
+    );
+
+    sections.forEach((section) => observer.observe(section));
+
+    return () => observer.disconnect();
+  }, [heroVisible]);
+
+  useEffect(() => {
+    const hero = document.querySelector("#hero");
+    if (!hero) return;
+
+    const heroObserver = new IntersectionObserver(
+      ([entry]) => {
+        setHeroVisible(entry.isIntersecting);
+      },
+      {
+        threshold: 0.6, // hero must be mostly visible
+      },
+    );
+
+    heroObserver.observe(hero);
+
+    return () => heroObserver.disconnect();
+  }, []);
+  useEffect(() => {
+    if (heroVisible) {
+      setActiveSection(null);
+    }
+  }, [heroVisible]);
 
   /* ===== GSAP CLOSE ===== */
   const closeMenu = () => {
@@ -118,24 +168,32 @@ export default function Header() {
               <a
                 key={item.href}
                 href={item.href}
-                className="
+                className={`
     relative
     text-[16.5px]
     font-semibold
     tracking-tight
-    text-[var(--color-primary-800)]
-    hover:text-[var(--color-blue-600)]
     transition-colors
+
+    ${
+      activeSection === item.href
+        ? "text-[var(--color-blue-600)]"
+        : "text-[var(--color-primary-800)] hover:text-[var(--color-blue-600)]"
+    }
 
     after:absolute
     after:left-0
     after:-bottom-1.5
     after:h-[2px]
-    after:w-0
     after:bg-[var(--color-blue-600)]
     after:transition-all
-    hover:after:w-full
-  "
+
+    ${
+      activeSection === item.href
+        ? "after:w-full"
+        : "after:w-0 hover:after:w-full"
+    }
+  `}
               >
                 {item.label}
               </a>
