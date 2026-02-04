@@ -229,7 +229,7 @@ export default function Header() {
              text-sm font-semibold
              hover:bg-[var(--color-blue-700)] transition"
               >
-                Pre-Register
+                Register
               </a>
             </div>
           </div>
