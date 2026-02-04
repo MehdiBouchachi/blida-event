@@ -110,7 +110,7 @@ export default function Header() {
           </a>
 
           {/* CENTER – DESKTOP NAV */}
-          <nav className="hidden md:flex items-center gap-8">
+          <nav className="hidden md:flex items-center gap-12">
             {NAV_LINKS.map((item) => (
               <a
                 key={item.href}
