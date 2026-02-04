@@ -5,9 +5,11 @@ import Link from "next/link";
 import logo from "../../../../public/logo.png";
 import Logo from "../../../ui/Logo";
 const NAV_LINKS = [
-  { label: "Workshop Objectives", href: "#objectives" },
-  { label: "Strategic Vision", href: "#strategy" },
   { label: "University 4.0", href: "#university-4" },
+
+  { label: "Strategic Vision", href: "#strategy" },
+  { label: "Workshop Objectives", href: "#objectives" },
+
   { label: "Schedule", href: "#schedule" },
   { label: "Registration", href: "#registration" },
 ];

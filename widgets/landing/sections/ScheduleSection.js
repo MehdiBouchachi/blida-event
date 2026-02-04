@@ -219,12 +219,16 @@ export default function WorkshopSchedule() {
 
                     {item.presenter && (
                       <p
-                        className="mt-1 text-sm font-medium"
-                        style={{ color: "var(--color-blue-700)" }}
+                        className="mt-1 text-sm"
+                        style={{ color: "var(--color-primary-500)" }}
                       >
-                        Presenter: {item.presenter}
+                        <span className="font-medium">Presenter:</span>{" "}
+                        <span className="font-normal">{item.presenter}</span>
                       </p>
                     )}
+
+                   
+
                     <p
                       className="mt-3 text-sm leading-relaxed max-w-4xl"
                       style={{ color: "var(--color-primary-600)" }}
@@ -279,13 +283,13 @@ export default function WorkshopSchedule() {
 
                     {item.presenter && (
                       <div
-                        className="mt-1 text-xs font-semibold"
-                        style={{ color: "var(--color-emerald-600)" }}
+                        className="mt-1 text-xs"
+                        style={{ color: "var(--color-primary-500)" }}
                       >
-                        Presenter: {item.presenter}
+                        <span className="font-medium">Presenter:</span>{" "}
+                        <span className="font-normal">{item.presenter}</span>
                       </div>
                     )}
-
                     <div
                       className="mt-1 text-xs font-medium"
                       style={{ color: "var(--color-primary-500)" }}
