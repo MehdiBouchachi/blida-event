@@ -120,7 +120,7 @@ export default function HeroSection() {
                 max-w-3xl mx-auto
                 px-5 sm:px-6 py-4
                 rounded-2xl
-                bg-blue-50/85
+                bg-white/85
                 backdrop-blur
                 border border-[var(--color-primary-200)]
                 shadow-sm
