@@ -157,8 +157,8 @@ export default function EventGoalsSection() {
                 style={{ color: "var(--color-primary-600)" }}
               >
                 Contribute to institutional alignment with the Algerian National
-                Digital Roadmap (SDN 2024–2025) and the University 4.0 vision by
-                fostering coherence between policy, governance, and operational
+                Digital Roadmap and the University 4.0 vision by fostering
+                coherence between policy, governance, and operational
                 implementation.
               </p>
             </div>
