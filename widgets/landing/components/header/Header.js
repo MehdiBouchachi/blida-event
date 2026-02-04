@@ -9,9 +9,12 @@ import Logo from "../../../ui/Logo";
 
 /* ================= CONFIG ================= */
 const NAV_LINKS = [
-  { label: "Objectives", href: "#objectives" },
-  { label: "Strategic Vision", href: "#strategy" },
   { label: "University 4.0", href: "#university-4" },
+
+  { label: "Strategic Vision", href: "#strategy" },
+  { label: "Presentations", href: "#presentations" },
+  { label: "Objectives", href: "#objectives" },
+
   { label: "Schedule", href: "#schedule" },
 ];
 
@@ -105,12 +108,12 @@ export default function Header() {
  flex items-center justify-between"
         >
           {/* LEFT */}
-          <a href="/" className="flex items-center gap-3">
+          <a href="#hero" className="flex items-center gap-3">
             <Logo />
           </a>
 
           {/* CENTER – DESKTOP NAV */}
-          <nav className="hidden md:flex items-center gap-12">
+          <nav className="hidden md:flex items-center gap-10">
             {NAV_LINKS.map((item) => (
               <a
                 key={item.href}
