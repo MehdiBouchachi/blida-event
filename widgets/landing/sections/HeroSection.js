@@ -70,7 +70,7 @@ export default function HeroSection() {
 
             <span className="flex items-center gap-2">
               <HiAcademicCap className="text-blue-600" size={14} />
-              Conference Room
+              Conference Room - Sports Complex
             </span>
           </div>
 
