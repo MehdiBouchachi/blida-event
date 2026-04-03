@@ -44,7 +44,8 @@ const SESSIONS = [
   {
     time: "09:00 – 09:40",
     category: "Keynote",
-    title: "Keynote: Pedagogical AI in Medical Education",
+    title:
+      "Learning and Teaching Medical and Clinical English Using Innovative Strategies Through Agentic AI: Case Study of the Moodle Platform at Blida 1 University",
     speaker: "Prof. Nasser Drareni, Blida 1 University",
     duration: "40 min",
     overview:
