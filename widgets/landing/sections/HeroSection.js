@@ -158,7 +158,8 @@ export default function HeroSection() {
                 size={14}
                 style={{ color: "var(--color-blue-600)" }}
               />
-              Conference Venue
+               Conference Room - Sports Complex",
+
             </span>
           </div>
 
