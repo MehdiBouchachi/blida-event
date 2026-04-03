@@ -12,7 +12,6 @@ const NAV_LINKS = [
   { label: "Resources", href: "#resources" },
   { label: "Program", href: "#program" },
   { label: "Deliverables", href: "#deliverables" },
-  { label: "Registration", href: "#registration" },
 ];
 
 export default function Header() {
