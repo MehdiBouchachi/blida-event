@@ -4,8 +4,8 @@ const HeroSection = dynamic(
   () => import("../widgets/landing/sections/HeroSection"),
   { ssr: true },
 );
-const StrategicSection = dynamic(
-  () => import("../widgets/landing/sections/StrategicSection"),
+const ResourceCard = dynamic(
+  () => import("../widgets/landing/sections/ResourceCard"),
   { ssr: true },
 );
 /* const MovingNoteSection = dynamic(
@@ -14,30 +14,25 @@ const StrategicSection = dynamic(
     ssr: true,
   },
 ); */
-const UniversityTransitionSection = dynamic(
-  () => import("../widgets/landing/sections/UniversityTransitionSection"),
+const WhatYouWillLearnSection = dynamic(
+  () => import("../widgets/landing/sections/WhatYouWillLearnSection"),
   {
     ssr: true,
   },
 );
-const FeaturedPresentations = dynamic(
-  () => import("../widgets/landing/sections/FeaturedPresentations"),
+const Programsection = dynamic(
+  () => import("../widgets/landing/sections/Programsection"),
   {
     ssr: true,
   },
 );
-const EventGoalsSection = dynamic(
-  () => import("../widgets/landing/sections/EventGoalsSection"),
+const WorkshopDeliverablesSection = dynamic(
+  () => import("../widgets/landing/sections/WorkshopDeliverablesSection"),
   {
     ssr: true,
   },
 );
-const ScheduleSection = dynamic(
-  () => import("../widgets/landing/sections/ScheduleSection"),
-  {
-    ssr: true,
-  },
-);
+
 const RegistrationSection = dynamic(
   () => import("../widgets/landing/sections/RegistrationSection"),
   { ssr: true },
@@ -47,16 +42,12 @@ export default function Page() {
   return (
     <main>
       <HeroSection />
-      {/*    <MovingNoteSection /> */}
-      <UniversityTransitionSection />
+      <WhatYouWillLearnSection />
 
-      <StrategicSection />
-      <FeaturedPresentations />
-      <EventGoalsSection />
-      <ScheduleSection />
+      <ResourceCard />
+      <Programsection />
+      <WorkshopDeliverablesSection />
       <RegistrationSection />
     </main>
   );
 }
-
-//FeaturedPresentations

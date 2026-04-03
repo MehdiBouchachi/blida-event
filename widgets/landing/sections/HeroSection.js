@@ -1,227 +1,260 @@
 "use client";
 
-import { FaCalendarAlt, FaMapMarkerAlt, FaUniversity } from "react-icons/fa";
+import { FaCalendarAlt, FaMapMarkerAlt, FaArrowRight } from "react-icons/fa";
+import { HiAcademicCap } from "react-icons/hi";
 
 export default function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative min-h-[100svh] overflow-hidden bg-[var(--color-primary-50)]"
+      className="relative overflow-hidden"
+      style={{ background: "var(--color-primary-50)" }}
     >
-      {/* ================= BACKGROUND ================= */}
-      <div className="absolute inset-0 pointer-events-none">
-        {/* Grid */}
+      {/* ── Background ── */}
+      <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(160deg, #eef4ff 0%, #f5f9ff 50%, #eaf1ff 100%)",
+          }}
+        />
+        {/* Academic grid */}
         <div
           className="absolute inset-0"
           style={{
             backgroundImage: `
-              linear-gradient(
-                to right,
-                color-mix(in srgb, var(--color-blue-600) 6%, transparent) 1px,
-                transparent 1px
-              ),
-              linear-gradient(
-                to bottom,
-                color-mix(in srgb, var(--color-blue-600) 6%, transparent) 1px,
-                transparent 1px
-              )
+              linear-gradient(to right, rgba(37,99,235,0.04) 1px, transparent 1px),
+              linear-gradient(to bottom, rgba(37,99,235,0.04) 1px, transparent 1px)
             `,
-            backgroundSize: "64px 64px",
+            backgroundSize: "60px 60px",
+            maskImage:
+              "linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.08) 100%)",
           }}
         />
-
-        {/* Glows */}
+        {/* Top center glow */}
         <div
-          className="
-            absolute -top-1/3 left-1/2 -translate-x-1/2
-            w-[420px] h-[420px]
-            sm:w-[700px] sm:h-[700px]
-            lg:w-[900px] lg:h-[900px]
-            rounded-full blur-[var(--hero-glow-blur-lg)]
-          "
-          style={{ background: "var(--hero-glow-blue)" }}
+          className="absolute left-1/2 -translate-x-1/2"
+          style={{
+            top: "-60px",
+            width: "900px",
+            height: "500px",
+            background:
+              "radial-gradient(ellipse at center top, rgba(37,99,235,0.10) 0%, transparent 68%)",
+          }}
         />
-
+        {/* Bottom fade */}
         <div
-          className="
-            absolute top-1/4 -right-1/4
-            w-[360px] h-[360px]
-            sm:w-[600px] sm:h-[600px]
-            lg:w-[700px] lg:h-[700px]
-            rounded-full blur-[var(--hero-glow-blur-lg)]
-          "
+          className="absolute inset-x-0 bottom-0 h-24"
           style={{
             background:
-              "color-mix(in srgb, var(--color-cyan-500) 20%, transparent)",
+              "linear-gradient(to top, rgba(37,99,235,0.05), transparent)",
           }}
         />
       </div>
 
-      {/* ================= CONTENT ================= */}
-      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="min-h-[calc(100svh-72px)] flex items-center justify-center pt-20 sm:pt-24">
-          <div className="max-w-4xl text-center">
-            {/* TITLE */}
-            <h1
-              className="
-                mt-8 font-extrabold tracking-tight
-                text-[var(--color-primary-800)]
-                text-[2.2rem] leading-tight
-                sm:text-4xl md:text-5xl lg:text-6xl
-              "
+      {/* ── Content ── */}
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div
+          className="flex flex-col items-center text-center"
+          style={{
+            minHeight: "calc(100svh - 76px)",
+            justifyContent: "center",
+            paddingTop: "clamp(3rem, 8vw, 5.5rem)",
+            paddingBottom: "clamp(2.5rem, 6vw, 4.5rem)",
+          }}
+        >
+          {/* Eyebrow */}
+          <div
+            className="inline-flex items-center gap-2.5 rounded-full border px-4 py-1.5 mb-6"
+            style={{
+              background: "rgba(255,255,255,0.85)",
+              borderColor: "var(--color-blue-200)",
+              backdropFilter: "blur(10px)",
+              boxShadow: "0 1px 8px rgba(37,99,235,0.07)",
+            }}
+          >
+            <span
+              className="w-1.5 h-1.5 rounded-full"
+              style={{ background: "var(--color-blue-600)" }}
+            />
+            <span
+              className="text-xs font-semibold uppercase tracking-widest"
+              style={{ color: "var(--color-blue-700)" }}
             >
-              Distance Learning
-              <span className="block mt-3 sm:mt-4 text-[var(--color-blue-600)]">
-                @Blida 1 University
-              </span>
-              <span
-                className="
-                  block mt-1 font-semibold tracking-tight
-                  text-[1.3rem] sm:text-xl md:text-2xl
-                  text-[var(--color-primary-700)]
-                "
+              University 4.0 Week · April 2026
+            </span>
+          </div>
+
+          {/* ── Official H1 ── */}
+          <h1
+            className="font-bold tracking-tight"
+            style={{
+              fontSize: "clamp(1.25rem, 2.6vw, 2rem)",
+              lineHeight: 1.35,
+              color: "var(--color-primary-900)",
+              maxWidth: "860px",
+              letterSpacing: "-0.01em",
+            }}
+          >
+            The Local Committee for Distance Education and the Development of
+            Information and Communication Technologies in the Pedagogical and
+            Research Environment of the{" "}
+            <span style={{ color: "var(--color-blue-600)" }}>
+              Blida 1 University
+            </span>
+            .
+          </h1>
+
+          {/* Thin rule */}
+          <div
+            className="mt-6 mb-6 rounded-full"
+            style={{
+              width: "48px",
+              height: "3px",
+              background:
+                "linear-gradient(90deg, var(--color-blue-600), var(--color-blue-300))",
+            }}
+          />
+
+          {/* Event theme label */}
+          <div
+            className="inline-flex items-center gap-2 rounded-lg px-4 py-2 mb-5"
+            style={{
+              background:
+                "linear-gradient(135deg, rgba(37,99,235,0.08), rgba(29,78,216,0.12))",
+              border: "1px solid rgba(191,219,254,0.8)",
+            }}
+          >
+            <HiAcademicCap
+              size={15}
+              style={{ color: "var(--color-blue-600)" }}
+            />
+            <span
+              className="text-sm font-semibold"
+              style={{ color: "var(--color-blue-700)" }}
+            >
+              Pedagogical AI &amp; Online Course Certification
+            </span>
+          </div>
+
+          {/* Description */}
+          <p
+            className="leading-relaxed"
+            style={{
+              color: "var(--color-primary-700)",
+              maxWidth: "640px",
+              fontSize: "clamp(0.88rem, 1.4vw, 1rem)",
+            }}
+          >
+            A focused academic event for university educators, pedagogical
+            leaders, and institutional stakeholders exploring how AI can support
+            course design, improve learner engagement, and align online programs
+            with certification requirements.
+          </p>
+
+          {/* Metadata */}
+          <div
+            className="mt-5 flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm font-medium"
+            style={{ color: "var(--color-primary-700)" }}
+          >
+            <span className="flex items-center gap-1.5">
+              <FaCalendarAlt
+                size={12}
+                style={{ color: "var(--color-blue-600)" }}
+              />
+              April 15, 2026
+            </span>
+            <span
+              className="hidden sm:inline self-center text-xs"
+              style={{ color: "var(--color-blue-300)" }}
+            >
+              ·
+            </span>
+            <span className="flex items-center gap-1.5">
+              <FaMapMarkerAlt
+                size={12}
+                style={{ color: "var(--color-blue-600)" }}
+              />
+              Blida 1 University
+            </span>
+            <span
+              className="hidden sm:inline self-center text-xs"
+              style={{ color: "var(--color-blue-300)" }}
+            >
+              ·
+            </span>
+            <span className="flex items-center gap-1.5">
+              <HiAcademicCap
+                size={14}
+                style={{ color: "var(--color-blue-600)" }}
+              />
+              Conference venue
+            </span>
+          </div>
+
+          {/* CTAs */}
+          <div className="mt-7 flex flex-col sm:flex-row gap-3 justify-center">
+            <a
+              href="#registration"
+              className="inline-flex items-center justify-center gap-2 rounded-xl px-7 py-3 text-white font-semibold text-sm transition-all hover:-translate-y-px"
+              style={{
+                background:
+                  "linear-gradient(135deg, var(--color-blue-600), var(--color-blue-700))",
+                boxShadow:
+                  "0 6px 22px rgba(37,99,235,0.22), 0 1px 3px rgba(37,99,235,0.14)",
+              }}
+            >
+              Register Now
+              <FaArrowRight size={11} />
+            </a>
+            <a
+              href="#schedule"
+              className="inline-flex items-center justify-center rounded-xl px-7 py-3 font-semibold text-sm border transition-all hover:border-[var(--color-blue-300)] hover:bg-white/80"
+              style={{
+                color: "var(--color-primary-800)",
+                borderColor: "var(--color-primary-200)",
+                background: "rgba(255,255,255,0.55)",
+                backdropFilter: "blur(8px)",
+              }}
+            >
+              View Program
+            </a>
+          </div>
+
+          {/* Info strip */}
+          <div
+            className="mt-9 grid grid-cols-3 gap-3 w-full"
+            style={{ maxWidth: "520px" }}
+          >
+            {[
+              { label: "Focus", value: "AI & Certification" },
+              { label: "Audience", value: "Faculty & Leaders" },
+              { label: "Format", value: "Academic Workshop" },
+            ].map((c) => (
+              <div
+                key={c.label}
+                className="rounded-xl border py-3 px-3"
+                style={{
+                  background: "rgba(255,255,255,0.65)",
+                  borderColor: "var(--color-primary-200)",
+                  backdropFilter: "blur(8px)",
+                }}
               >
-                Transformation in the 4.0 Era
-              </span>
-            </h1>
-
-            {/* DESCRIPTION */}
-            <p
-              className="
-                mt-4 text-sm leading-[1.5]
-                text-[var(--color-primary-600)]
-                max-w-[32ch] mx-auto sm:hidden
-              "
-            >
-              An academic workshop at Blida 1 University addressing distance
-              learning within the University 4.0 vision.
-            </p>
-
-            {/* DESCRIPTION – DESKTOP */}
-            <p
-              className="
-                mt-8 hidden 
-                text-base 
-                leading-relaxed
-                text-[var(--color-primary-600)]
-                max-w-3xl mx-auto sm:block
-              "
-            >
-              An inaugural academic workshop addressing the strategic,
-              pedagogical, and institutional challenges of distance learning in
-              higher education. The event focuses on digital pedagogy, secure
-              online assessment, and governance models aligned with the
-              University 4.0 vision.
-            </p>
-            {/* ================= ACADEMIC NOTICE (ICON-FREE) ================= */}
-            <div
-              className="
-                mt-9
-                max-w-3xl mx-auto
-                px-5 sm:px-6 py-4
-                rounded-2xl
-                bg-blue-50/85
-                backdrop-blur
-                border border-[var(--color-primary-200)]
-                shadow-sm
-                text-left
-                relative
-              "
-            >
-              {/* Accent line */}
-
-              <div className="pl-4 sm:pl-5 space-y-1.5">
                 <p
-                  className="
-                    text-sm sm:text-[0.95rem]
-                    sm:leading-relaxed
-                    leading-[1.8]
-                    text-[var(--color-primary-700)]
-                  "
+                  className="text-[0.6rem] font-bold uppercase tracking-widest"
+                  style={{ color: "var(--color-blue-600)" }}
                 >
-                  <span className="font-semibold text-[var(--color-primary-800)]">
-                    Certificate of Attendance:
-                  </span>{" "}
-                  A named certificate of attendance will be issued to all
-                  registered participants upon completion of the workshop.
+                  {c.label}
+                </p>
+                <p
+                  className="mt-1 text-[0.78rem] font-semibold leading-tight"
+                  style={{ color: "var(--color-primary-900)" }}
+                >
+                  {c.value}
                 </p>
               </div>
-            </div>
-
-            {/* META */}
-            <div
-              className="
-                mt-8 sm:mt-9
-                flex flex-col sm:flex-row flex-wrap
-                justify-center items-center
-                gap-y-3 gap-x-8
-                text-sm
-                text-[var(--color-primary-700)]
-              "
-            >
-              <div className="flex items-center gap-2">
-                <FaCalendarAlt className="text-[var(--color-blue-600)]" />
-                <span>12 February 2026</span>
-              </div>
-
-              <span className="hidden sm:inline-block h-4 w-px bg-[var(--color-primary-300)]" />
-
-              <div className="flex items-center gap-2">
-                <FaMapMarkerAlt className="text-[var(--color-blue-600)]" />
-                <span>Aeronautics Institute · Conference Room</span>
-              </div>
-
-              <span className="hidden sm:inline-block h-4 w-px bg-[var(--color-primary-300)]" />
-
-              <div className="flex items-center gap-2">
-                <FaUniversity className="text-[var(--color-blue-600)]" />
-                <span>Blida 1 University</span>
-              </div>
-            </div>
-
-            {/* CTAs */}
-            <div
-              className="
-                mt-8 sm:mt-10
-                flex flex-col sm:flex-row
-                justify-center items-center
-                gap-4
-              "
-            >
-              <a
-                href="#registration"
-                className="
-                  w-full sm:w-auto
-                  inline-flex items-center justify-center
-                  px-8 sm:px-10 py-4 rounded-xl
-                  bg-[var(--color-blue-600)]
-                  text-white
-                  text-sm md:text-base font-semibold
-                  shadow-lg
-                  hover:bg-[var(--color-blue-700)]
-                  transition
-                "
-              >
-                Register & Complete Survey
-              </a>
-
-              <a
-                href="#schedule"
-                className="
-                  w-full sm:w-auto
-                  inline-flex items-center justify-center
-                  px-8 sm:px-10 py-4 rounded-xl
-                  border border-[var(--color-primary-300)]
-                  text-[var(--color-primary-800)]
-                  text-sm md:text-base font-medium
-                  hover:border-[var(--color-blue-400)]
-                  hover:text-[var(--color-blue-600)]
-                  transition
-                "
-              >
-                View Workshop Schedule
-              </a>
-            </div>
+            ))}
           </div>
         </div>
       </div>

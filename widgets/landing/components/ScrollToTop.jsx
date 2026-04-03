@@ -5,7 +5,7 @@ import { FaArrowUp, FaClipboardList } from "react-icons/fa";
 
 export default function FloatingActions() {
   const [scrolled, setScrolled] = useState(false);
-  const [inRegistrationFlow, setInRegistrationFlow] = useState(false);
+  const [inregistrationFlow, setInregistrationFlow] = useState(false);
 
   /* Detect scroll */
   useEffect(() => {
@@ -24,7 +24,7 @@ export default function FloatingActions() {
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        setInRegistrationFlow(entry.isIntersecting);
+        setInregistrationFlow(entry.isIntersecting);
       },
       { threshold: 0.05 },
     );
@@ -33,7 +33,7 @@ export default function FloatingActions() {
     return () => observer.disconnect();
   }, []);
 
-  const shouldShow = scrolled && !inRegistrationFlow;
+  const shouldShow = scrolled && !inregistrationFlow;
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
