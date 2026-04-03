@@ -11,166 +11,74 @@ const heroStats = [
 
 export default function HeroSection() {
   return (
-    <section
-      id="hero"
-      className="relative overflow-hidden"
-      style={{ background: "var(--color-primary-50)" }}
-    >
+    <section id="hero" className="relative overflow-hidden bg-[#f4f8ff]">
       {/* Background */}
       <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              "linear-gradient(160deg, #eef4ff 0%, #f6f9ff 48%, #edf3ff 100%)",
-          }}
-        />
-
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage: `
-              linear-gradient(to right, rgba(37,99,235,0.04) 1px, transparent 1px),
-              linear-gradient(to bottom, rgba(37,99,235,0.04) 1px, transparent 1px)
-            `,
-            backgroundSize: "58px 58px",
-            maskImage:
-              "linear-gradient(to bottom, rgba(0,0,0,0.56) 0%, rgba(0,0,0,0.08) 100%)",
-          }}
-        />
-
-        <div
-          className="absolute left-1/2 -translate-x-1/2"
-          style={{
-            top: "-90px",
-            width: "980px",
-            height: "560px",
-            background:
-              "radial-gradient(ellipse at center top, rgba(37,99,235,0.12) 0%, transparent 70%)",
-          }}
-        />
+        <div className="absolute inset-0 bg-[linear-gradient(160deg,#eef4ff_0%,#f6f9ff_48%,#edf3ff_100%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(37,99,235,0.035)_1px,transparent_1px),linear-gradient(to_bottom,rgba(37,99,235,0.035)_1px,transparent_1px)] bg-[size:46px_46px]" />
+        <div className="absolute left-1/2 top-[-140px] h-[420px] w-[760px] -translate-x-1/2 bg-[radial-gradient(circle,rgba(37,99,235,0.10)_0%,transparent_70%)]" />
       </div>
 
-      {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div
-          className="flex flex-col items-center text-center"
-          style={{
-            minHeight: "calc(100svh - 76px)",
-            justifyContent: "center",
-            paddingTop: "clamp(4.5rem, 10vw, 7rem)",
-            paddingBottom: "clamp(3rem, 6vw, 5rem)",
-          }}
-        >
+      <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        {/* 
+          HEADER OFFSET:
+          Header = h-20 = 80px
+          pt-24 = 96px gives breathing room under the fixed header
+          min-height subtracts header space
+        */}
+        <div className="flex min-h-[calc(100svh-80px)] flex-col items-center justify-center pt-24 pb-10 sm:min-h-[calc(100svh-80px)] sm:pt-28 sm:pb-14 lg:pt-32 lg:pb-16">
           {/* Eyebrow */}
-          <div
-            className="mb-6 inline-flex items-center gap-2.5 rounded-full border px-4 py-1.5"
-            style={{
-              background: "rgba(255,255,255,0.84)",
-              borderColor: "var(--color-blue-200)",
-            }}
-          >
-            <span
-              className="h-1.5 w-1.5 rounded-full"
-              style={{ background: "var(--color-blue-600)" }}
-            />
-            <span
-              className="text-[11px] font-semibold uppercase tracking-[0.18em]"
-              style={{ color: "var(--color-blue-700)" }}
-            >
-              University 4.0 Week · April 2026
+          <div className="mb-4 inline-flex max-w-full items-center gap-2 rounded-full border border-blue-200 bg-white/85 px-3 py-1.5 shadow-sm sm:mb-5 sm:px-4">
+            <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-blue-600" />
+            <span className="truncate text-[10px] font-bold uppercase tracking-[0.16em] text-blue-700 sm:text-[11px]">
+              University 4.0 · April 2026
             </span>
           </div>
 
-          {/* H1 (NEW TITLE) */}
-          <h1
-            className="font-bold tracking-tight"
-            style={{
-              fontSize: "clamp(2rem, 5vw, 3.5rem)",
-              lineHeight: 1.05,
-              color: "var(--color-primary-900)",
-              maxWidth: "900px",
-              letterSpacing: "-0.02em",
-            }}
-          >
+          {/* Title */}
+          <h1 className="mx-auto max-w-[320px] text-center text-[1.95rem] font-extrabold leading-[1.08] tracking-[-0.03em] text-slate-900 sm:max-w-3xl sm:text-5xl lg:text-6xl">
             The Distance Learning Committee of{" "}
-            <span style={{ color: "var(--color-blue-600)" }}>
-              Blida 1 University
-            </span>
+            <span className="text-blue-600">Blida 1 University</span>
           </h1>
 
           {/* Description */}
-          <p
-            className="mt-5 leading-relaxed"
-            style={{
-              color: "var(--color-primary-700)",
-              maxWidth: "820px",
-              fontSize: "clamp(0.98rem, 1.6vw, 1.1rem)",
-            }}
-          >
-            A focused academic event for educators, pedagogical leaders, and
-            institutional stakeholders exploring how AI can strengthen course
-            design, improve learner engagement, and support certification-ready
-            online education.
+          <p className="mt-4 max-w-[305px] text-center text-[0.95rem] leading-7 text-slate-600 sm:mt-5 sm:max-w-2xl sm:text-lg sm:leading-8">
+            A focused academic event for educators and institutional leaders
+            exploring how AI can improve course design, learner engagement, and
+            certification-ready education.
           </p>
 
           {/* Theme badge */}
-          <div
-            className="mt-6 inline-flex items-center gap-2 rounded-xl px-4 py-2"
-            style={{
-              background:
-                "linear-gradient(135deg, rgba(37,99,235,0.08), rgba(29,78,216,0.12))",
-              border: "1px solid rgba(191,219,254,0.9)",
-            }}
-          >
-            <HiAcademicCap
-              size={15}
-              style={{ color: "var(--color-blue-600)" }}
-            />
-            <span
-              className="text-sm font-semibold"
-              style={{ color: "var(--color-blue-700)" }}
-            >
-              Pedagogical AI · Course Certification · University 4.0
+          <div className="mt-5 inline-flex max-w-full items-center gap-2 rounded-2xl border border-blue-200 bg-blue-50/80 px-3 py-2 shadow-sm sm:mt-6 sm:px-4">
+            <HiAcademicCap className="shrink-0 text-blue-600" size={15} />
+            <span className="truncate text-[0.74rem] font-semibold text-blue-700 sm:text-sm">
+              Pedagogical AI · Certification · University 4.0
             </span>
           </div>
 
           {/* Metadata */}
-          <div className="mt-6 flex flex-wrap justify-center gap-4 text-sm">
+          <div className="mt-5 flex flex-col items-center gap-2 text-[0.87rem] text-slate-600 sm:mt-6 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-5 sm:text-sm">
             <span className="flex items-center gap-2">
-              <FaCalendarAlt
-                size={12}
-                style={{ color: "var(--color-blue-600)" }}
-              />
+              <FaCalendarAlt className="text-blue-600" size={12} />
               April 15, 2026
             </span>
 
             <span className="flex items-center gap-2">
-              <FaMapMarkerAlt
-                size={12}
-                style={{ color: "var(--color-blue-600)" }}
-              />
+              <FaMapMarkerAlt className="text-blue-600" size={12} />
               Blida 1 University
             </span>
 
             <span className="flex items-center gap-2">
-              <HiAcademicCap
-                size={14}
-                style={{ color: "var(--color-blue-600)" }}
-              />
-              Conference Room - Sports Complex
+              <HiAcademicCap className="text-blue-600" size={14} />
+              Conference Room
             </span>
           </div>
 
           {/* CTA */}
-          <div className="mt-8 flex flex-col sm:flex-row gap-3">
+          <div className="mt-6 flex w-full max-w-[340px] flex-col gap-3 sm:mt-8 sm:max-w-none sm:flex-row sm:justify-center">
             <a
               href="#registration"
-              className="inline-flex items-center justify-center gap-2 rounded-xl px-7 py-3 text-white font-semibold text-sm"
-              style={{
-                background:
-                  "linear-gradient(135deg, var(--color-blue-600), var(--color-blue-700))",
-              }}
+              className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-blue-600 to-blue-700 px-6 text-sm font-semibold text-white shadow-[0_10px_30px_rgba(37,99,235,0.22)] transition hover:scale-[1.01]"
             >
               Register Now
               <FaArrowRight size={11} />
@@ -178,33 +86,24 @@ export default function HeroSection() {
 
             <a
               href="#program"
-              className="inline-flex items-center justify-center rounded-xl px-7 py-3 font-semibold text-sm border"
-              style={{
-                color: "var(--color-primary-800)",
-                borderColor: "var(--color-primary-200)",
-                background: "rgba(255,255,255,0.6)",
-              }}
+              className="inline-flex h-12 w-full items-center justify-center rounded-2xl border border-slate-200 bg-white/80 px-6 text-sm font-semibold text-slate-800 shadow-sm transition hover:bg-white"
             >
               View Program
             </a>
           </div>
 
           {/* Stats */}
-          <div className="mt-10 grid w-full max-w-md sm:max-w-2xl sm:grid-cols-3 gap-3">
-            {heroStats.map((c) => (
+          <div className="mt-8 grid w-full max-w-[340px] grid-cols-1 gap-3 sm:mt-10 sm:max-w-3xl sm:grid-cols-3">
+            {heroStats.map((item) => (
               <div
-                key={c.label}
-                className="rounded-xl border px-4 py-3 text-center"
-                style={{
-                  background: "rgba(255,255,255,0.7)",
-                  borderColor: "var(--color-primary-200)",
-                }}
+                key={item.label}
+                className="rounded-2xl border border-slate-200 bg-white/75 px-4 py-4 text-center shadow-sm backdrop-blur-sm"
               >
-                <p className="text-[10px] font-bold uppercase text-blue-600">
-                  {c.label}
+                <p className="text-[10px] font-extrabold uppercase tracking-[0.14em] text-blue-600">
+                  {item.label}
                 </p>
-                <p className="text-sm font-semibold text-slate-900 mt-1">
-                  {c.value}
+                <p className="mt-1.5 text-[0.98rem] font-semibold leading-6 text-slate-900">
+                  {item.value}
                 </p>
               </div>
             ))}
