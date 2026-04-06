@@ -1,41 +1,16 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { useRegister } from "../../../app/_hooks/useRegister"; // adjust path as needed
 
 /* ─────────────────────────────────────────────────────────────
-   CONFIG
+   RESPONSIVE HELPERS
 ───────────────────────────────────────────────────────────── */
 
 const STEPS = [
-  {
-    id: 1,
-    label: "Your Profile",
-    short: "Profile",
-    icon: "👤",
-    desc: "Basic info",
-  },
-  {
-    id: 2,
-    label: "Certification",
-    short: "Certification",
-    icon: "📋",
-    desc: "Moodle & courses",
-  },
-  {
-    id: 3,
-    label: "AI in Teaching",
-    short: "AI Usage",
-    icon: "🤖",
-    desc: "Tools & interests",
-  },
-  {
-    id: 4,
-    label: "Expectations",
-    short: "Expectations",
-    icon: "🎯",
-    desc: "Workshop goals",
-  },
+  { id: 1, label: "Your Profile", icon: "👤", desc: "Basic info" },
+  { id: 2, label: "Certification", icon: "📋", desc: "Moodle & courses" },
+  { id: 3, label: "AI in Teaching", icon: "🤖", desc: "Tools & interests" },
+  { id: 4, label: "Expectations", icon: "🎯", desc: "Workshop goals" },
 ];
 
 const FACULTY_GROUPS = [
@@ -71,6 +46,7 @@ const ATTENDANCE_OPTIONS = [
   "No, I can't attend",
   "Not sure yet",
 ];
+
 const YEARS_HE_SCALE = [
   "< 2 yrs",
   "2–5 yrs",
@@ -115,6 +91,7 @@ const MOODLE_FEATURES_OPTIONS = [
   "None of the above",
   "Other",
 ];
+
 const COURSE_STATUS_OPTIONS = [
   "No online courses yet",
   "Have courses, no certification pursued",
@@ -123,6 +100,7 @@ const COURSE_STATUS_OPTIONS = [
   "Already certified ≥ 1 course",
   "Don't plan to certify",
 ];
+
 const KNOWLEDGE_GAP_OPTIONS = [
   "Understanding requirements & process",
   "Designing per pedagogical charter",
@@ -134,6 +112,7 @@ const KNOWLEDGE_GAP_OPTIONS = [
   "Confident in all areas",
   "Other",
 ];
+
 const BARRIER_OPTIONS = [
   "Time constraints",
   "Technical Moodle skills",
@@ -143,6 +122,7 @@ const BARRIER_OPTIONS = [
   "Not convinced of value",
   "Other",
 ];
+
 const SUCCESS_RESOURCES_OPTIONS = [
   "Clearer guidelines & docs",
   "Templates & course examples",
@@ -153,6 +133,7 @@ const SUCCESS_RESOURCES_OPTIONS = [
   "AI tools & resources",
   "Other",
 ];
+
 const CERTIFY_PLAN_OPTIONS = [
   "Yes — courses identified",
   "Probably — need to plan",
@@ -160,6 +141,7 @@ const CERTIFY_PLAN_OPTIONS = [
   "No — not planning",
   "Unsure",
 ];
+
 const AI_TOOLS_USED_OPTIONS = [
   "ChatGPT / language models",
   "AI-powered tutoring",
@@ -170,6 +152,7 @@ const AI_TOOLS_USED_OPTIONS = [
   "Other AI tools",
   "Haven't used any",
 ];
+
 const AI_INTERESTS_OPTIONS = [
   "Personalizing learning",
   "Automating routine tasks",
@@ -180,6 +163,7 @@ const AI_INTERESTS_OPTIONS = [
   "Improving course design",
   "Other",
 ];
+
 const WORKSHOP_VALUE_OPTIONS = [
   "Practical demos & examples",
   "Certification requirements explained",
@@ -190,6 +174,7 @@ const WORKSHOP_VALUE_OPTIONS = [
   "Integrating AI into teaching",
   "Other",
 ];
+
 const HEARD_ABOUT_OPTIONS = [
   "Email from department",
   "Colleague recommendation",
@@ -260,14 +245,19 @@ const INITIAL = {
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
-function useResponsiveFlag(bp = 640) {
+function useResponsiveFlag(breakpoint = 640) {
   const [isMobile, setIsMobile] = useState(false);
+
   useEffect(() => {
-    const fn = () => setIsMobile(window.innerWidth < bp);
-    fn();
-    window.addEventListener("resize", fn);
-    return () => window.removeEventListener("resize", fn);
-  }, [bp]);
+    function handleResize() {
+      setIsMobile(window.innerWidth < breakpoint);
+    }
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [breakpoint]);
+
   return isMobile;
 }
 
@@ -277,11 +267,11 @@ function useResponsiveFlag(bp = 640) {
 
 export default function RegistrationSection() {
   const isMobile = useResponsiveFlag(640);
-  const { register, isLoading, error: submitError, isSuccess } = useRegister();
 
   const [step, setStep] = useState(0);
   const [form, setForm] = useState(INITIAL);
   const [touched, setTouched] = useState({});
+  const [showSuccess, setShowSuccess] = useState(false);
   const fieldRefs = useRef({});
   const topRef = useRef(null);
 
@@ -290,6 +280,7 @@ export default function RegistrationSection() {
   function set(key, val) {
     setForm((p) => ({ ...p, [key]: val }));
   }
+
   function toggle(key, val) {
     setForm((p) => ({
       ...p,
@@ -298,70 +289,94 @@ export default function RegistrationSection() {
         : [...p[key], val],
     }));
   }
+
   function isEmpty(v) {
     return Array.isArray(v) ? v.length === 0 : !v || !String(v).trim();
   }
 
   function validate(key) {
-    if (key === "email") return !!form.email && EMAIL_RE.test(form.email);
-    if (key === "status")
+    const v = form[key];
+
+    if (key === "email") return !!v && EMAIL_RE.test(v);
+
+    if (key === "status") {
       return (
         !isEmpty(form.status) &&
         (form.status !== "Other" || !isEmpty(form.statusOther))
       );
-    if (key === "moodleFeaturesUsed")
+    }
+
+    if (key === "moodleFeaturesUsed") {
       return (
         form.moodleFeaturesUsed.length > 0 &&
         (!form.moodleFeaturesUsed.includes("Other") ||
           !isEmpty(form.moodleFeaturesOther))
       );
-    if (key === "knowledgeGaps")
+    }
+
+    if (key === "knowledgeGaps") {
       return (
         form.knowledgeGaps.length > 0 &&
         (!form.knowledgeGaps.includes("Other") ||
           !isEmpty(form.knowledgeGapsOther))
       );
-    if (key === "primaryBarrier")
+    }
+
+    if (key === "primaryBarrier") {
       return (
         !isEmpty(form.primaryBarrier) &&
         (form.primaryBarrier !== "Other" || !isEmpty(form.primaryBarrierOther))
       );
-    if (key === "resourcesNeeded")
+    }
+
+    if (key === "resourcesNeeded") {
       return (
         form.resourcesNeeded.length > 0 &&
         (!form.resourcesNeeded.includes("Other") ||
           !isEmpty(form.resourcesNeededOther))
       );
-    if (key === "aiToolsUsed")
+    }
+
+    if (key === "aiToolsUsed") {
       return (
         form.aiToolsUsed.length > 0 &&
         (!form.aiToolsUsed.includes("Other AI tools") ||
           !isEmpty(form.aiToolsUsedOther))
       );
-    if (key === "aiInterests")
+    }
+
+    if (key === "aiInterests") {
       return (
         form.aiInterests.length > 0 &&
         (!form.aiInterests.includes("Other") || !isEmpty(form.aiInterestsOther))
       );
-    if (key === "workshopValue")
+    }
+
+    if (key === "workshopValue") {
       return (
         form.workshopValue.length > 0 &&
         (!form.workshopValue.includes("Other") ||
           !isEmpty(form.workshopValueOther))
       );
-    if (key === "heardAboutWorkshop")
+    }
+
+    if (key === "heardAboutWorkshop") {
       return (
         !isEmpty(form.heardAboutWorkshop) &&
         (form.heardAboutWorkshop !== "Other" ||
           !isEmpty(form.heardAboutWorkshopOther))
       );
+    }
+
     if (key === "courseStatus") return form.courseStatus.length > 0;
-    return !isEmpty(form[key]);
+
+    return !isEmpty(v);
   }
 
   function isStepValid(s) {
     return (REQUIRED_FIELDS[s] || []).every(validate);
   }
+
   function countDone(s) {
     return (REQUIRED_FIELDS[s] || []).filter(validate).length;
   }
@@ -378,71 +393,69 @@ export default function RegistrationSection() {
   const stepDone = countDone(step);
   const stepTotal = (REQUIRED_FIELDS[step] || []).length;
 
-  function touchAll(s) {
-    const t = {};
-    (REQUIRED_FIELDS[s] || []).forEach((k) => (t[k] = true));
-    setTouched((p) => ({ ...p, ...t }));
-  }
-
   function focusFirst(s) {
     const first = (REQUIRED_FIELDS[s] || []).find((k) => !validate(k));
     if (!first) return;
+
     requestAnimationFrame(() => {
       const el = fieldRefs.current[first];
       if (!el) return;
       el.scrollIntoView({ behavior: "smooth", block: "center" });
-      el.focus?.();
+      if (el.focus) el.focus();
     });
   }
 
   function goNext() {
-    touchAll(step);
+    const touchedNow = {};
+    (REQUIRED_FIELDS[step] || []).forEach((k) => {
+      touchedNow[k] = true;
+    });
+    setTouched((p) => ({ ...p, ...touchedNow }));
+
     if (!isStepValid(step)) {
       focusFirst(step);
       return;
     }
-    setStep((p) => p + 1);
-    requestAnimationFrame(() =>
-      topRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }),
-    );
+
+    const next = step + 1;
+    setStep(next);
+    requestAnimationFrame(() => {
+      topRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
   }
 
   function goPrev() {
     setStep((p) => Math.max(p - 1, 0));
-    requestAnimationFrame(() =>
-      topRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }),
-    );
+    requestAnimationFrame(() => {
+      topRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
   }
 
-  async function handleSubmit(e) {
+  function handleSubmit(e) {
     e.preventDefault();
-    touchAll(step);
+
+    const touchedNow = {};
+    (REQUIRED_FIELDS[step] || []).forEach((k) => {
+      touchedNow[k] = true;
+    });
+    setTouched((p) => ({ ...p, ...touchedNow }));
+
     if (!isStepValid(step)) {
       focusFirst(step);
       return;
     }
 
-    // Flatten arrays → comma-separated strings for Google Sheets
-    const payload = {
-      ...form,
-      submittedAt: new Date().toISOString(),
-    };
-
-    const result = await register(payload);
-    if (result.success) {
-      setForm(INITIAL);
-      setStep(0);
-      setTouched({});
-      topRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
+    setShowSuccess(true);
+    setForm(INITIAL);
+    setStep(0);
+    setTouched({});
   }
 
   function fieldError(key) {
     return touched[key] && !validate(key);
   }
 
-  /* ── Success screen ── */
-  if (isSuccess) {
+  if (showSuccess) {
     return (
       <section
         id="registration"
@@ -453,32 +466,31 @@ export default function RegistrationSection() {
             maxWidth: 560,
             margin: "0 auto",
             textAlign: "center",
-            padding: isMobile ? "32px 20px" : "52px 44px",
+            padding: isMobile ? "28px 20px" : "36px 32px",
             background: "#fff",
-            borderRadius: 20,
+            borderRadius: 16,
             border: "1px solid var(--color-primary-200, #e2e8f0)",
-            boxShadow: "0 8px 40px rgba(15,23,42,0.07)",
+            boxShadow: "0 8px 28px rgba(15,23,42,0.05)",
           }}
         >
-          {/* Check circle */}
           <div
             style={{
-              width: 72,
-              height: 72,
-              margin: "0 auto 24px",
+              width: 64,
+              height: 64,
+              margin: "0 auto 20px",
               borderRadius: "50%",
               background: "#f0fdf4",
-              border: "2px solid #bbf7d0",
+              border: "1px solid #bbf7d0",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
             }}
           >
-            <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
               <path
-                d="M7 17l7.5 7.5L27 11"
+                d="M6 14l6 6 10-12"
                 stroke="#16a34a"
-                strokeWidth="2.5"
+                strokeWidth="2.2"
                 strokeLinecap="round"
                 strokeLinejoin="round"
               />
@@ -487,102 +499,49 @@ export default function RegistrationSection() {
 
           <h2
             style={{
-              fontSize: isMobile ? "1.4rem" : "1.8rem",
-              fontWeight: 800,
-              letterSpacing: "-0.02em",
+              fontSize: isMobile ? "1.35rem" : "1.7rem",
+              fontWeight: 700,
               color: "var(--color-primary-900)",
               marginBottom: 10,
             }}
           >
-            You're Registered! 🎉
+            Registration Submitted
           </h2>
 
           <p
             style={{
-              fontSize: "0.95rem",
-              lineHeight: 1.75,
-              color: "var(--color-primary-600)",
-              marginBottom: 8,
-            }}
-          >
-            Your registration has been successfully submitted and saved to our
-            records.
-          </p>
-          <p
-            style={{
-              fontSize: "0.875rem",
+              fontSize: isMobile ? "0.9rem" : "0.95rem",
               lineHeight: 1.7,
-              color: "var(--color-primary-500)",
-              marginBottom: 36,
+              color: "var(--color-primary-600)",
+              marginBottom: 26,
             }}
           >
-            We'll follow up with details about the{" "}
-            <strong style={{ color: "var(--color-primary-800)" }}>
-              April 15, 2026
-            </strong>{" "}
-            workshop at Blida 1 University. Check your inbox at{" "}
-            <strong style={{ color: "var(--color-blue-600)" }}>
-              {form.email || "the email you provided"}
-            </strong>
-            .
+            Your responses have been recorded in the interface. Backend
+            submission will be connected later.
           </p>
 
-          <div
+          <button
+            type="button"
+            onClick={() => setShowSuccess(false)}
             style={{
-              display: "flex",
-              gap: 10,
-              justifyContent: "center",
-              flexDirection: isMobile ? "column" : "row",
+              padding: "11px 26px",
+              borderRadius: 10,
+              background: "var(--color-blue-600)",
+              color: "#fff",
+              fontSize: "0.9rem",
+              fontWeight: 600,
+              cursor: "pointer",
+              border: "none",
+              width: isMobile ? "100%" : "auto",
             }}
           >
-            <a
-              href="#program"
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                justifyContent: "center",
-                padding: "11px 24px",
-                borderRadius: 10,
-                border: "1.5px solid var(--color-primary-200)",
-                background: "#fff",
-                color: "var(--color-primary-700)",
-                fontSize: "0.875rem",
-                fontWeight: 600,
-                textDecoration: "none",
-              }}
-            >
-              View Program
-            </a>
-            <button
-              type="button"
-              onClick={() => {
-                setForm(INITIAL);
-                setStep(0);
-                setTouched({});
-              }}
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                justifyContent: "center",
-                padding: "11px 24px",
-                borderRadius: 10,
-                background: "var(--color-blue-600, #2563eb)",
-                color: "#fff",
-                fontSize: "0.875rem",
-                fontWeight: 600,
-                cursor: "pointer",
-                border: "none",
-              }}
-            >
-              Register Another Person
-            </button>
-          </div>
+            Fill the form again
+          </button>
         </div>
       </section>
     );
   }
 
-  /* ── Main form ── */
   return (
     <section
       id="registration"
@@ -591,7 +550,11 @@ export default function RegistrationSection() {
     >
       {/* Section header */}
       <div
-        style={{ maxWidth: 720, margin: "0 auto 32px", textAlign: "center" }}
+        style={{
+          maxWidth: 720,
+          margin: "0 auto 32px",
+          textAlign: "center",
+        }}
       >
         <p
           style={{
@@ -627,6 +590,7 @@ export default function RegistrationSection() {
           </svg>
           Workshop Registration
         </p>
+
         <h2
           style={{
             fontSize: "clamp(1.5rem, 3vw, 2.25rem)",
@@ -639,6 +603,7 @@ export default function RegistrationSection() {
         >
           Register &amp; Baseline Assessment
         </h2>
+
         <p
           style={{
             fontSize: isMobile ? "0.88rem" : "0.9375rem",
@@ -672,10 +637,10 @@ export default function RegistrationSection() {
             overflow: "hidden",
           }}
         >
-          {/* Step header */}
+          {/* Step header bar */}
           <div
             style={{
-              padding: isMobile ? "16px" : "18px 28px",
+              padding: isMobile ? "16px 16px" : "18px 28px",
               borderBottom: "1px solid var(--color-primary-200, #e2e8f0)",
               background: "var(--color-primary-50, #f8fafc)",
               display: "flex",
@@ -709,6 +674,7 @@ export default function RegistrationSection() {
                 {STEPS[step].label}
               </p>
             </div>
+
             <div
               style={{
                 fontSize: "0.76rem",
@@ -720,23 +686,28 @@ export default function RegistrationSection() {
                 background:
                   stepDone === stepTotal
                     ? "#f0fdf4"
-                    : "var(--color-primary-50)",
-                border: `1px solid ${stepDone === stepTotal ? "#bbf7d0" : "var(--color-primary-200)"}`,
+                    : "var(--color-primary-100, #f0f4ff)",
+                border: `1px solid ${
+                  stepDone === stepTotal
+                    ? "#bbf7d0"
+                    : "var(--color-primary-200, #e2e8f0)"
+                }`,
                 borderRadius: 999,
                 padding: "6px 12px",
               }}
             >
               {stepDone === stepTotal
                 ? "✓ Step complete"
-                : `${stepDone}/${stepTotal} required`}
+                : `${stepDone} / ${stepTotal} fields`}
             </div>
           </div>
 
           {/* Form body */}
           <div
-            style={{ padding: isMobile ? "16px 16px 6px" : "28px 28px 8px" }}
+            style={{
+              padding: isMobile ? "16px 16px 6px" : "28px 28px 8px",
+            }}
           >
-            {/* ── STEP 1 ── */}
             {step === 0 && (
               <div
                 style={{ display: "flex", flexDirection: "column", gap: 16 }}
@@ -897,7 +868,6 @@ export default function RegistrationSection() {
               </div>
             )}
 
-            {/* ── STEP 2 ── */}
             {step === 1 && (
               <div
                 style={{ display: "flex", flexDirection: "column", gap: 16 }}
@@ -1134,7 +1104,6 @@ export default function RegistrationSection() {
               </div>
             )}
 
-            {/* ── STEP 3 ── */}
             {step === 2 && (
               <div
                 style={{ display: "flex", flexDirection: "column", gap: 16 }}
@@ -1229,7 +1198,6 @@ export default function RegistrationSection() {
               </div>
             )}
 
-            {/* ── STEP 4 ── */}
             {step === 3 && (
               <div
                 style={{ display: "flex", flexDirection: "column", gap: 16 }}
@@ -1313,73 +1281,12 @@ export default function RegistrationSection() {
             )}
           </div>
 
-          {/* ── Error banner ── */}
-          {submitError && (
-            <div
-              style={{
-                margin: isMobile ? "12px 16px 0" : "12px 28px 0",
-                padding: "12px 16px",
-                borderRadius: 10,
-                background: "#fef2f2",
-                border: "1px solid #fecaca",
-                display: "flex",
-                alignItems: "flex-start",
-                gap: 10,
-              }}
-            >
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 16 16"
-                fill="none"
-                style={{ flexShrink: 0, marginTop: 2 }}
-              >
-                <circle
-                  cx="8"
-                  cy="8"
-                  r="7"
-                  stroke="#dc2626"
-                  strokeWidth="1.5"
-                />
-                <path
-                  d="M8 5v3.5M8 11h.01"
-                  stroke="#dc2626"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                />
-              </svg>
-              <div>
-                <p
-                  style={{
-                    margin: 0,
-                    fontSize: "0.82rem",
-                    fontWeight: 700,
-                    color: "#b91c1c",
-                  }}
-                >
-                  Submission failed
-                </p>
-                <p
-                  style={{
-                    margin: "3px 0 0",
-                    fontSize: "0.78rem",
-                    color: "#dc2626",
-                    lineHeight: 1.5,
-                  }}
-                >
-                  {submitError}. Please check your connection and try again.
-                </p>
-              </div>
-            </div>
-          )}
-
-          {/* ── Footer nav ── */}
+          {/* Footer nav */}
           <div
             style={{
               padding: isMobile ? "14px 16px" : "20px 28px",
               borderTop: "1px solid var(--color-primary-200, #e2e8f0)",
               background: "var(--color-primary-50, #f8fafc)",
-              marginTop: 20,
             }}
           >
             {isMobile ? (
@@ -1405,6 +1312,7 @@ export default function RegistrationSection() {
                     </span>
                   )}
                 </div>
+
                 <div
                   style={{
                     display: "grid",
@@ -1415,7 +1323,7 @@ export default function RegistrationSection() {
                   <button
                     type="button"
                     onClick={goPrev}
-                    disabled={step === 0 || isLoading}
+                    disabled={step === 0}
                     style={{
                       display: "flex",
                       alignItems: "center",
@@ -1423,7 +1331,7 @@ export default function RegistrationSection() {
                       gap: 6,
                       padding: "11px 14px",
                       borderRadius: 10,
-                      border: "1px solid var(--color-primary-300)",
+                      border: "1px solid var(--color-primary-300, #cbd5e1)",
                       background: "#fff",
                       cursor: step === 0 ? "not-allowed" : "pointer",
                       fontSize: "0.84rem",
@@ -1449,7 +1357,6 @@ export default function RegistrationSection() {
                     <button
                       type="button"
                       onClick={goNext}
-                      disabled={isLoading}
                       style={{
                         display: "flex",
                         alignItems: "center",
@@ -1484,47 +1391,37 @@ export default function RegistrationSection() {
                   ) : (
                     <button
                       type="submit"
-                      disabled={isLoading}
                       style={{
                         gridColumn: "1 / -1",
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
-                        gap: 8,
+                        gap: 6,
                         padding: "12px 16px",
                         borderRadius: 10,
-                        background: isLoading ? "#86efac" : "#16a34a",
+                        background: "#16a34a",
                         color: "#fff",
-                        fontSize: "0.875rem",
+                        fontSize: "0.86rem",
                         fontWeight: 700,
-                        cursor: isLoading ? "not-allowed" : "pointer",
+                        cursor: "pointer",
                         border: "none",
-                        transition: "background 0.15s",
                       }}
                     >
-                      {isLoading ? (
-                        <>
-                          <Spinner /> Submitting…
-                        </>
-                      ) : (
-                        <>
-                          Submit Registration
-                          <svg
-                            width="14"
-                            height="14"
-                            viewBox="0 0 14 14"
-                            fill="none"
-                          >
-                            <path
-                              d="M2 7h10M8 3l4 4-4 4"
-                              stroke="currentColor"
-                              strokeWidth="1.6"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            />
-                          </svg>
-                        </>
-                      )}
+                      Submit Registration
+                      <svg
+                        width="14"
+                        height="14"
+                        viewBox="0 0 14 14"
+                        fill="none"
+                      >
+                        <path
+                          d="M2 7h10M8 3l4 4-4 4"
+                          stroke="currentColor"
+                          strokeWidth="1.6"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
                     </button>
                   )}
                 </div>
@@ -1541,7 +1438,7 @@ export default function RegistrationSection() {
                 <button
                   type="button"
                   onClick={goPrev}
-                  disabled={step === 0 || isLoading}
+                  disabled={step === 0}
                   style={{
                     display: "flex",
                     alignItems: "center",
@@ -1592,7 +1489,6 @@ export default function RegistrationSection() {
                   <button
                     type="button"
                     onClick={goNext}
-                    disabled={isLoading}
                     style={{
                       display: "flex",
                       alignItems: "center",
@@ -1621,46 +1517,30 @@ export default function RegistrationSection() {
                 ) : (
                   <button
                     type="submit"
-                    disabled={isLoading}
                     style={{
                       display: "flex",
                       alignItems: "center",
-                      gap: 8,
+                      gap: 6,
                       padding: "9px 22px",
                       borderRadius: 8,
-                      minWidth: 168,
-                      background: isLoading ? "#86efac" : "#16a34a",
+                      background: "#16a34a",
                       color: "#fff",
                       fontSize: "0.875rem",
                       fontWeight: 600,
-                      cursor: isLoading ? "not-allowed" : "pointer",
+                      cursor: "pointer",
                       border: "none",
-                      transition: "background 0.15s",
                     }}
                   >
-                    {isLoading ? (
-                      <>
-                        <Spinner /> Submitting…
-                      </>
-                    ) : (
-                      <>
-                        Submit Registration
-                        <svg
-                          width="14"
-                          height="14"
-                          viewBox="0 0 14 14"
-                          fill="none"
-                        >
-                          <path
-                            d="M2 7h10M8 3l4 4-4 4"
-                            stroke="currentColor"
-                            strokeWidth="1.6"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                        </svg>
-                      </>
-                    )}
+                    Submit Registration
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                      <path
+                        d="M2 7h10M8 3l4 4-4 4"
+                        stroke="currentColor"
+                        strokeWidth="1.6"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
                   </button>
                 )}
               </div>
@@ -1673,38 +1553,9 @@ export default function RegistrationSection() {
 }
 
 /* ─────────────────────────────────────────────────────────────
-   SPINNER
-───────────────────────────────────────────────────────────── */
-function Spinner() {
-  return (
-    <svg
-      width="16"
-      height="16"
-      viewBox="0 0 16 16"
-      fill="none"
-      style={{ animation: "spin 0.7s linear infinite", flexShrink: 0 }}
-    >
-      <style>{`@keyframes spin{to{transform:rotate(360deg)}}`}</style>
-      <circle
-        cx="8"
-        cy="8"
-        r="6"
-        stroke="rgba(255,255,255,0.3)"
-        strokeWidth="2"
-      />
-      <path
-        d="M8 2a6 6 0 0 1 6 6"
-        stroke="white"
-        strokeWidth="2"
-        strokeLinecap="round"
-      />
-    </svg>
-  );
-}
-
-/* ─────────────────────────────────────────────────────────────
    STEPPER BLOCK
 ───────────────────────────────────────────────────────────── */
+
 function StepperBlock({
   step,
   totalSteps,
@@ -1724,11 +1575,11 @@ function StepperBlock({
         boxShadow: "0 1px 3px rgba(0,0,0,0.03)",
       }}
     >
-      {/* Progress row */}
+      {/* Top progress row */}
       <div
         style={{
-          padding: isMobile ? "14px" : "16px 20px 14px",
-          borderBottom: "1px solid var(--color-primary-200)",
+          padding: isMobile ? "14px 14px 12px" : "16px 20px 14px",
+          borderBottom: "1px solid var(--color-primary-200, #e2e8f0)",
           display: "flex",
           alignItems: isMobile ? "stretch" : "center",
           justifyContent: "space-between",
@@ -1752,7 +1603,7 @@ function StepperBlock({
           <p
             style={{
               margin: "6px 0 0",
-              fontSize: "0.95rem",
+              fontSize: isMobile ? "1rem" : "0.95rem",
               fontWeight: 700,
               color: "var(--color-primary-900)",
             }}
@@ -1760,6 +1611,7 @@ function StepperBlock({
             Step {step + 1} of {totalSteps}
           </p>
         </div>
+
         <div style={{ flex: 1, minWidth: 0 }}>
           <div
             style={{
@@ -1787,6 +1639,7 @@ function StepperBlock({
               {pct}%
             </span>
           </div>
+
           <div
             style={{
               height: 8,
@@ -1807,6 +1660,7 @@ function StepperBlock({
             />
           </div>
         </div>
+
         <div
           style={{
             alignSelf: isMobile ? "flex-start" : "auto",
@@ -1815,8 +1669,14 @@ function StepperBlock({
             color:
               stepDone === stepTotal ? "#166534" : "var(--color-primary-600)",
             background:
-              stepDone === stepTotal ? "#f0fdf4" : "var(--color-primary-50)",
-            border: `1px solid ${stepDone === stepTotal ? "#bbf7d0" : "var(--color-primary-200)"}`,
+              stepDone === stepTotal
+                ? "#f0fdf4"
+                : "var(--color-primary-50, #f8fafc)",
+            border: `1px solid ${
+              stepDone === stepTotal
+                ? "#bbf7d0"
+                : "var(--color-primary-200, #e2e8f0)"
+            }`,
             borderRadius: 999,
             padding: "6px 12px",
             whiteSpace: "nowrap",
@@ -1828,26 +1688,27 @@ function StepperBlock({
         </div>
       </div>
 
-      {/* Step tabs — mobile: 2×2 grid / desktop: horizontal */}
+      {/* Mobile step pills */}
       {isMobile ? (
         <div
           style={{
-            padding: "12px",
+            padding: "12px 12px 14px",
             display: "grid",
             gridTemplateColumns: "1fr 1fr",
             gap: 8,
           }}
         >
           {STEPS.map((s, i) => {
-            const isActive = i === step,
-              isDone = i < step;
+            const isActive = i === step;
+            const isDone = i < step;
+
             return (
               <div
                 key={s.id}
                 style={{
-                  border: "1px solid var(--color-primary-200)",
+                  border: "1px solid var(--color-primary-200, #e2e8f0)",
                   borderRadius: 12,
-                  padding: "10px",
+                  padding: "10px 10px 9px",
                   background: isActive
                     ? "var(--color-blue-50, #eff6ff)"
                     : "#fff",
@@ -1858,7 +1719,7 @@ function StepperBlock({
                     display: "flex",
                     alignItems: "center",
                     gap: 8,
-                    marginBottom: 4,
+                    marginBottom: 6,
                   }}
                 >
                   <div
@@ -1871,38 +1732,41 @@ function StepperBlock({
                       justifyContent: "center",
                       fontSize: "0.68rem",
                       fontWeight: 700,
-                      flexShrink: 0,
                       background: isDone
                         ? "#16a34a"
                         : isActive
-                          ? "var(--color-blue-600)"
-                          : "var(--color-primary-100)",
+                          ? "var(--color-blue-600, #2563eb)"
+                          : "var(--color-primary-100, #e2e8f0)",
                       color:
                         isDone || isActive
                           ? "#fff"
                           : "var(--color-primary-500)",
+                      flexShrink: 0,
                     }}
                   >
                     {isDone ? "✓" : s.id}
                   </div>
+
                   <span
                     style={{
                       fontSize: "0.75rem",
                       fontWeight: 700,
                       color: isActive
-                        ? "var(--color-blue-700)"
-                        : "var(--color-primary-800)",
+                        ? "var(--color-blue-700, #1d4ed8)"
+                        : "var(--color-primary-800, #1e293b)",
+                      lineHeight: 1.2,
                     }}
                   >
                     {s.short}
                   </span>
                 </div>
+
                 <p
                   style={{
                     margin: 0,
-                    fontSize: "0.7rem",
+                    fontSize: "0.72rem",
+                    lineHeight: 1.45,
                     color: "var(--color-primary-500)",
-                    lineHeight: 1.4,
                   }}
                 >
                   {s.desc}
@@ -1919,22 +1783,23 @@ function StepperBlock({
           }}
         >
           {STEPS.map((s, i) => {
-            const isActive = i === step,
-              isDone = i < step;
+            const isActive = i === step;
+            const isDone = i < step;
+
             return (
               <div
                 key={s.id}
                 style={{
-                  padding: "14px",
+                  padding: "14px 14px 13px",
                   background: isActive
                     ? "var(--color-blue-50, #eff6ff)"
                     : "#fff",
                   borderRight:
                     i !== totalSteps - 1
-                      ? "1px solid var(--color-primary-200)"
+                      ? "1px solid var(--color-primary-200, #e2e8f0)"
                       : "none",
                   borderTop: isActive
-                    ? "2px solid var(--color-blue-600)"
+                    ? "2px solid var(--color-blue-600, #2563eb)"
                     : "2px solid transparent",
                 }}
               >
@@ -1960,8 +1825,8 @@ function StepperBlock({
                       background: isDone
                         ? "#16a34a"
                         : isActive
-                          ? "var(--color-blue-600)"
-                          : "var(--color-primary-100)",
+                          ? "var(--color-blue-600, #2563eb)"
+                          : "var(--color-primary-100, #e2e8f0)",
                       color:
                         isDone || isActive
                           ? "#fff"
@@ -1970,24 +1835,27 @@ function StepperBlock({
                   >
                     {isDone ? "✓" : s.id}
                   </div>
+
                   <span
                     style={{
                       fontSize: "0.76rem",
                       fontWeight: isActive ? 700 : 600,
                       color: isActive
-                        ? "var(--color-blue-700)"
-                        : "var(--color-primary-700)",
+                        ? "var(--color-blue-700, #1d4ed8)"
+                        : "var(--color-primary-700, #334155)",
+                      lineHeight: 1.2,
                     }}
                   >
                     {s.short}
                   </span>
                 </div>
+
                 <p
                   style={{
                     margin: 0,
                     fontSize: "0.68rem",
-                    color: "var(--color-primary-500)",
                     lineHeight: 1.35,
+                    color: "var(--color-primary-500)",
                   }}
                 >
                   {s.desc}
@@ -2004,6 +1872,7 @@ function StepperBlock({
 /* ─────────────────────────────────────────────────────────────
    SCALE SELECTOR
 ───────────────────────────────────────────────────────────── */
+
 function ScaleSelector({
   options,
   value,
@@ -2018,9 +1887,16 @@ function ScaleSelector({
   if (isMobile) {
     return (
       <div ref={inputRef} tabIndex={-1}>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: 10 }}>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr",
+            gap: 10,
+          }}
+        >
           {options.map((opt, i) => {
             const isSelected = value === opt;
+
             return (
               <button
                 key={opt}
@@ -2033,7 +1909,11 @@ function ScaleSelector({
                   gap: 12,
                   width: "100%",
                   borderRadius: 12,
-                  border: `1.5px solid ${isSelected ? accentColor : "var(--color-primary-200)"}`,
+                  border: `1.5px solid ${
+                    isSelected
+                      ? accentColor
+                      : "var(--color-primary-200, #e2e8f0)"
+                  }`,
                   background: isSelected ? `${accentColor}10` : "#fff",
                   padding: "10px 12px",
                   cursor: "pointer",
@@ -2057,16 +1937,19 @@ function ScaleSelector({
                 >
                   {i + 1}
                 </div>
-                <span
-                  style={{
-                    fontSize: "0.86rem",
-                    fontWeight: isSelected ? 700 : 600,
-                    color: isSelected ? accentColor : "#334155",
-                    lineHeight: 1.35,
-                  }}
-                >
-                  {opt}
-                </span>
+
+                <div>
+                  <div
+                    style={{
+                      fontSize: "0.86rem",
+                      fontWeight: isSelected ? 700 : 600,
+                      color: isSelected ? accentColor : "#334155",
+                      lineHeight: 1.35,
+                    }}
+                  >
+                    {opt}
+                  </div>
+                </div>
               </button>
             );
           })}
@@ -2079,7 +1962,10 @@ function ScaleSelector({
     <div
       ref={inputRef}
       tabIndex={-1}
-      style={{ overflowX: "auto", paddingTop: 4 }}
+      style={{
+        overflowX: "auto",
+        paddingTop: 4,
+      }}
     >
       <div
         style={{
@@ -2113,6 +1999,7 @@ function ScaleSelector({
             />
           )}
         </div>
+
         <div
           style={{
             display: "grid",
@@ -2123,8 +2010,9 @@ function ScaleSelector({
           }}
         >
           {options.map((opt, i) => {
-            const isSelected = value === opt,
-              isPast = selectedIdx > i;
+            const isSelected = value === opt;
+            const isPast = selectedIdx > i;
+
             return (
               <button
                 key={opt}
@@ -2151,7 +2039,13 @@ function ScaleSelector({
                     justifyContent: "center",
                     fontSize: "0.76rem",
                     fontWeight: 700,
-                    border: `2px solid ${isSelected ? accentColor : isPast ? `${accentColor}66` : "#dbe5f1"}`,
+                    border: `2px solid ${
+                      isSelected
+                        ? accentColor
+                        : isPast
+                          ? `${accentColor}66`
+                          : "#dbe5f1"
+                    }`,
                     background: isSelected
                       ? accentColor
                       : isPast
@@ -2169,6 +2063,7 @@ function ScaleSelector({
                 >
                   {i + 1}
                 </div>
+
                 <span
                   style={{
                     fontSize: "0.72rem",
@@ -2193,6 +2088,7 @@ function ScaleSelector({
 /* ─────────────────────────────────────────────────────────────
    CHIP GROUP
 ───────────────────────────────────────────────────────────── */
+
 function ChipGroup({
   options,
   value,
@@ -2207,10 +2103,15 @@ function ChipGroup({
     <div
       ref={inputRef}
       tabIndex={-1}
-      style={{ display: "flex", flexWrap: "wrap", gap: isMobile ? 8 : 10 }}
+      style={{
+        display: "flex",
+        flexWrap: "wrap",
+        gap: isMobile ? 8 : 10,
+      }}
     >
       {options.map((opt) => {
         const checked = type === "radio" ? value === opt : values.includes(opt);
+
         return (
           <button
             key={opt}
@@ -2225,11 +2126,15 @@ function ChipGroup({
               fontSize: isMobile ? "0.84rem" : "0.86rem",
               fontWeight: checked ? 600 : 500,
               cursor: "pointer",
-              border: `1.5px solid ${checked ? "var(--color-blue-600, #2563eb)" : "var(--color-primary-200)"}`,
+              border: `1.5px solid ${
+                checked
+                  ? "var(--color-blue-600, #2563eb)"
+                  : "var(--color-primary-200, #e2e8f0)"
+              }`,
               background: checked ? "var(--color-blue-50, #eff6ff)" : "#fff",
               color: checked
                 ? "var(--color-blue-700, #1d4ed8)"
-                : "var(--color-primary-700)",
+                : "var(--color-primary-700, #334155)",
               display: "inline-flex",
               alignItems: "center",
               gap: 8,
@@ -2245,7 +2150,9 @@ function ChipGroup({
                   height: 15,
                   borderRadius: 4,
                   flexShrink: 0,
-                  border: `1.5px solid ${checked ? "var(--color-blue-600)" : "#cbd5e1"}`,
+                  border: `1.5px solid ${
+                    checked ? "var(--color-blue-600)" : "#cbd5e1"
+                  }`,
                   background: checked ? "var(--color-blue-600)" : "#fff",
                   display: "flex",
                   alignItems: "center",
@@ -2265,6 +2172,7 @@ function ChipGroup({
                 )}
               </span>
             )}
+
             {type === "radio" && (
               <span
                 style={{
@@ -2272,7 +2180,9 @@ function ChipGroup({
                   height: 15,
                   borderRadius: "50%",
                   flexShrink: 0,
-                  border: `1.5px solid ${checked ? "var(--color-blue-600)" : "#cbd5e1"}`,
+                  border: `1.5px solid ${
+                    checked ? "var(--color-blue-600)" : "#cbd5e1"
+                  }`,
                   background: checked ? "var(--color-blue-600)" : "#fff",
                   display: "flex",
                   alignItems: "center",
@@ -2291,6 +2201,7 @@ function ChipGroup({
                 )}
               </span>
             )}
+
             <span style={{ flex: 1 }}>{opt}</span>
           </button>
         );
@@ -2302,21 +2213,24 @@ function ChipGroup({
 /* ─────────────────────────────────────────────────────────────
    QUESTION ROW
 ───────────────────────────────────────────────────────────── */
+
 function QRow({ label, required, help, error, children, isMobile = false }) {
   return (
     <div
       style={{
         borderRadius: 14,
-        padding: isMobile ? "16px 14px" : "18px 20px 20px",
-        border: `1px solid ${error ? "#fca5a5" : "var(--color-primary-200)"}`,
+        border: `1px solid ${
+          error ? "#fca5a5" : "var(--color-primary-200, #e2e8f0)"
+        }`,
         background: error ? "#fff5f5" : "#fff",
+        padding: isMobile ? "16px 14px" : "18px 20px 20px",
       }}
     >
       <div style={{ marginBottom: 14 }}>
         <p
           style={{
             margin: 0,
-            fontSize: "0.95rem",
+            fontSize: isMobile ? "0.95rem" : "0.95rem",
             fontWeight: 700,
             color: "var(--color-primary-900)",
             lineHeight: 1.35,
@@ -2327,6 +2241,7 @@ function QRow({ label, required, help, error, children, isMobile = false }) {
             <span style={{ color: "#ef4444", marginLeft: 4 }}>*</span>
           )}
         </p>
+
         {help && (
           <p
             style={{
@@ -2339,6 +2254,7 @@ function QRow({ label, required, help, error, children, isMobile = false }) {
             {help}
           </p>
         )}
+
         {error && (
           <p
             style={{
@@ -2352,6 +2268,7 @@ function QRow({ label, required, help, error, children, isMobile = false }) {
           </p>
         )}
       </div>
+
       {children}
     </div>
   );
@@ -2360,6 +2277,7 @@ function QRow({ label, required, help, error, children, isMobile = false }) {
 /* ─────────────────────────────────────────────────────────────
    INPUTS
 ───────────────────────────────────────────────────────────── */
+
 function TextInput({
   value,
   onChange,
@@ -2367,7 +2285,7 @@ function TextInput({
   placeholder,
   inputRef,
   hasError,
-  style: extra,
+  style: extraStyle,
 }) {
   return (
     <input
@@ -2380,14 +2298,16 @@ function TextInput({
         width: "100%",
         height: 44,
         borderRadius: 10,
-        border: `1.5px solid ${hasError ? "#fca5a5" : "var(--color-primary-300, #cbd5e1)"}`,
+        border: `1.5px solid ${
+          hasError ? "#fca5a5" : "var(--color-primary-300, #cbd5e1)"
+        }`,
         padding: "0 14px",
         fontSize: "0.875rem",
         color: "var(--color-primary-900)",
         background: "#fff",
         outline: "none",
         boxSizing: "border-box",
-        ...extra,
+        ...extraStyle,
       }}
     />
   );
@@ -2410,7 +2330,9 @@ function SelectInput({
         width: "100%",
         height: 44,
         borderRadius: 10,
-        border: `1.5px solid ${hasError ? "#fca5a5" : "var(--color-primary-300, #cbd5e1)"}`,
+        border: `1.5px solid ${
+          hasError ? "#fca5a5" : "var(--color-primary-300, #cbd5e1)"
+        }`,
         padding: "0 14px",
         fontSize: "0.875rem",
         color: value ? "var(--color-primary-900)" : "#94a3b8",

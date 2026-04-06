@@ -27,7 +27,7 @@ const items = [
     icon: <FaLayerGroup size={16} />,
     title: "Course Design Excellence",
     description:
-      "Learn the recommended 12-section course structure according to the national pedagogical charter. Master alignment between objectives, activities, and assessments.",
+      "Learn the recommended course structure according to the national pedagogical charter. Master alignment between objectives, activities, and assessments.",
     meta: "Module 2 · 11:00 – 11:30",
   },
   {

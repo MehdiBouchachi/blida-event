@@ -164,9 +164,9 @@ const SESSIONS = [
     speaker: "Dr. Abdelli, Blida 1 University",
     duration: "30 min",
     overview:
-      "This session explains how to structure an online course according to the national pedagogical charter, including the recommended 12-section model and alignment between objectives, activities, and assessments.",
+      "This session explains how to structure an online course according to the national pedagogical charter, including the recommended model and alignment between objectives, activities, and assessments.",
     objectives: [
-      "Understand the 12-section course structure",
+      "Understand the course structure",
       "Align learning objectives with activities and evaluations",
       "Improve pedagogical consistency in Moodle",
     ],
@@ -1038,7 +1038,7 @@ function OverviewBar() {
   const stats = [
     { label: "Format", value: "Full Day Workshop" },
     { label: "Time", value: "08:30 – 15:00" },
-    { label: "Duration", value: "Approx. 6.5 hours" },
+    { label: "Duration", value: "Approx. 5.30 hours" },
     {
       label: "Structure",
       value: "Opening · Keynote · 4 Modules · Q&A · Closing",

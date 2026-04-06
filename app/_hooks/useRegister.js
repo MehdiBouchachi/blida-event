@@ -1,4 +1,5 @@
 "use client";
+
 import { useState, useCallback } from "react";
 
 export function useRegister() {
@@ -14,6 +15,9 @@ export function useRegister() {
     try {
       const res = await fetch("/api/register", {
         method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify(formData),
       });
 
