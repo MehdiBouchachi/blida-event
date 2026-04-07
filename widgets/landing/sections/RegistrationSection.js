@@ -521,24 +521,6 @@ export default function RegistrationSection() {
             Your registration has been successfully submitted and saved to our
             records.
           </p>
-          <p
-            style={{
-              fontSize: "0.875rem",
-              lineHeight: 1.7,
-              color: "var(--color-primary-500)",
-              marginBottom: 36,
-            }}
-          >
-            We'll follow up with details about the{" "}
-            <strong style={{ color: "var(--color-primary-800)" }}>
-              April 15, 2026
-            </strong>{" "}
-            workshop at Blida 1 University. Check your inbox at{" "}
-            <strong style={{ color: "var(--color-blue-600)" }}>
-              {submittedEmail || "the email you provided"}
-            </strong>
-            .
-          </p>
 
           <div
             style={{
