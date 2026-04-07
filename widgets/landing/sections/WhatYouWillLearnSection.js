@@ -21,7 +21,7 @@ const items = [
     title: "National Certification Framework",
     description:
       "Master the complete regulatory pathway for online course certification according to Ministry standards. Understand institutional structure, stakeholder roles, eligibility criteria, and the full workflow.",
-    meta: "Module 1 · 10:15 – 10:45",
+    meta: "Module 1 · 10:30 – 11:00",
   },
   {
     icon: <FaLayerGroup size={16} />,
@@ -35,14 +35,14 @@ const items = [
     title: "Interactive Learning Strategies",
     description:
       "Transition from static content delivery to dynamic, interactive learning. Design evaluation strategies including formative, continuous, summative, and certificative assessments.",
-    meta: "Module 3 · 13:00 – 13:30",
+    meta: "Module 3 · 11:30 – 12:00",
   },
   {
     icon: <FaFlask size={16} />,
     title: "Practical Case Study & Certification Process",
     description:
       "Examine a real certified online course and simulate the submission and evaluation process. Learn how courses are assessed and how to meet certification criteria.",
-    meta: "Module 4 · 13:45 – 14:15",
+    meta: "Module 4 · 12:00 – 12:30",
   },
 ];
 

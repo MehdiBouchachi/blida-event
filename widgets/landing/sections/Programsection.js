@@ -42,12 +42,12 @@ const SESSIONS = [
     ],
   },
   {
-    time: "09:00 – 09:40",
+    time: "09:00 – 10:00",
     category: "Keynote",
     title:
       "Learning and Teaching Medical and Clinical English Using Innovative Strategies Through Agentic AI: Case Study of the Moodle Platform at Blida 1 University",
     speaker: "Prof. Nasser Drareni, Blida 1 University",
-    duration: "40 min",
+    duration: "40 min + 20 min",
     overview:
       "This keynote presentation showcases a compelling real-world case study demonstrating how agentic artificial intelligence can fundamentally transform the teaching and learning experience in specialized domains, specifically medical and clinical English. The speaker will present concrete, practical examples from the University of Blida 1's Moodle platform, illustrating how AI-powered tools create interactive, responsive learning environments that adapt to individual student needs in real time.",
     objectives: [
@@ -86,11 +86,11 @@ const SESSIONS = [
     ],
   },
   {
-    time: "10:00 – 10:15",
+    time: "10:00 – 10:20",
     category: "Break",
     title: "Coffee Break",
     speaker: "—",
-    duration: "15 min",
+    duration: "20 min",
     overview:
       "A short networking and refreshment break between the keynote and the technical training modules.",
     objectives: [
@@ -103,7 +103,7 @@ const SESSIONS = [
     topics: ["Networking"],
   },
   {
-    time: "10:15 – 10:45",
+    time: "10:30 – 11:00",
     category: "Module",
     title: "Module 1: National Expertise Framework & Workflow",
     speaker: "Dr. Brahimi, Blida 1 University",
@@ -192,7 +192,7 @@ const SESSIONS = [
     ],
   },
   {
-    time: "13:00 – 13:30",
+    time: "11:30 – 12:00",
     category: "Module",
     title: "Module 3: Interactivity & Student Engagement on Moodle",
     speaker: "Dr. Toumi, Blida 1 University",
@@ -245,7 +245,7 @@ const SESSIONS = [
     ],
   },
   {
-    time: "13:45 – 14:15",
+    time: "12:00 – 12:30",
     category: "Module",
     title: "Module 4: Case Study & Certification Process",
     speaker: "Dr. Allaoui & Dr. Amirouche, Blida 1 University",
@@ -300,7 +300,7 @@ const SESSIONS = [
     ],
   },
   {
-    time: "14:15 – 14:30",
+    time: "12:30 – 13:30",
     category: "Final Q&A",
     title: "Final Q&A and Open Discussion",
     speaker: "All Speakers",
@@ -334,7 +334,7 @@ const SESSIONS = [
     ],
   },
   {
-    time: "14:30 – 15:00",
+    time: "13:30 – 14:00",
     category: "Closing",
     title: "Synthesis, Deliverables Distribution & Closing",
     speaker: "Distance Learning Commission",

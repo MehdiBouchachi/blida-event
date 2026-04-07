@@ -12,7 +12,7 @@ const heroStats = [
 const metaItems = [
   { icon: FaCalendarAlt, label: "April 15, 2026" },
   { icon: FaMapMarkerAlt, label: "Blida 1 University" },
-  { icon: HiAcademicCap, label: "Conference Room - Sports Complex" },
+  { icon: HiAcademicCap, label: "Conference Room - Architecture Institute" },
 ];
 
 export default function HeroSection() {
