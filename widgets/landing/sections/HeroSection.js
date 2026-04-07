@@ -89,16 +89,16 @@ export default function HeroSection() {
 
         {/* ── CTAs ── */}
         <div className="mt-7 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">
-          
-           <a href="#registration"
+          <a
+            href="#registration"
             className="inline-flex min-h-[48px] items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-[var(--color-blue-600)] to-[var(--color-blue-700)] px-6 py-3 text-sm font-semibold text-white shadow-[0_10px_24px_rgba(37,99,235,0.22)] transition-all hover:-translate-y-0.5"
           >
             Register Now
             <FaArrowRight size={11} />
           </a>
 
-          
-           <a href="#program"
+          <a
+            href="#program"
             className="inline-flex min-h-[48px] items-center justify-center rounded-2xl border border-[var(--color-primary-200)] bg-white/80 px-6 py-3 text-sm font-semibold text-[var(--color-primary-800)] backdrop-blur transition-all hover:border-[var(--color-blue-300)] hover:bg-white"
           >
             View Program
@@ -112,7 +112,10 @@ export default function HeroSection() {
               key={label}
               className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/80 px-4 py-2 text-xs font-medium text-[var(--color-primary-700)] shadow-sm backdrop-blur-sm transition-all duration-150 hover:-translate-y-0.5 hover:border-blue-200 hover:bg-white hover:shadow sm:text-[0.8rem]"
             >
-              <Icon size={12} className="shrink-0 text-[var(--color-blue-600)]" />
+              <Icon
+                size={12}
+                className="shrink-0 text-[var(--color-blue-600)]"
+              />
               {label}
             </div>
           ))}

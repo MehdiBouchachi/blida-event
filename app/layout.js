@@ -36,10 +36,10 @@ export const viewport = {
 };
 export const metadata = {
   title: {
-    template: "%s | Distance learning",
-    default: "Welcome | Blida 1",
+    template: "%s | Blida 1 University",
+    default: "Blida 1 University",
   },
-  description: "Distance learing blida 1 university",
+  description: "Blida 1 University official event platform",
   icons: {
     icon: "/favicon.png",
   },
