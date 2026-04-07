@@ -84,7 +84,7 @@ export default function Page() {
       <CountdownSection />
       <WhatYouWillLearnSection />
 
-      <ResourceCard />
+      {/*  <ResourceCard /> */}
       <Programsection />
       <WorkshopDeliverablesSection />
       <RegistrationSection />
