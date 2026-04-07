@@ -23,10 +23,7 @@ export default function HeroSection() {
     >
       {/* ── Background ── */}
       <div className="pointer-events-none absolute inset-0" aria-hidden="true">
-        {/* base gradient */}
         <div className="absolute inset-0 bg-[linear-gradient(160deg,#eef4ff_0%,#f8fbff_48%,#edf3ff_100%)]" />
-
-        {/* grid */}
         <div
           className="absolute inset-0"
           style={{
@@ -39,20 +36,14 @@ export default function HeroSection() {
               "linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, transparent 85%)",
           }}
         />
-
-        {/* top center glow */}
         <div className="absolute left-1/2 -top-20 h-[440px] w-[900px] -translate-x-1/2 rounded-full bg-[radial-gradient(ellipse_at_center,rgba(37,99,235,0.13)_0%,transparent_70%)]" />
-
-        {/* side blobs */}
         <div className="absolute left-[6%] top-1/3 h-40 w-40 rounded-full bg-blue-300/10 blur-3xl" />
         <div className="absolute right-[6%] bottom-1/4 h-44 w-44 rounded-full bg-blue-400/10 blur-3xl" />
-
-        {/* bottom fade */}
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#edf3ff]/60 to-transparent" />
       </div>
 
       {/* ── Content ── */}
-      <div className="relative z-10 mx-auto flex min-h-[100svh] max-w-5xl flex-col items-center justify-center px-4 pb-12 pt-28 text-center sm:px-6 sm:pt-32 lg:px-8">
+      <div className="relative z-10 mx-auto flex min-h-[100svh] max-w-5xl flex-col items-center justify-center px-4 pb-12 pt-40 text-center sm:px-6 sm:pt-32 lg:px-8">
         {/* ── Eyebrow ── */}
         <div className="mb-6 flex justify-center">
           <div className="inline-flex max-w-full items-center gap-2.5 rounded-full border border-blue-200/80 bg-white/90 px-4 py-2 shadow-sm backdrop-blur-sm sm:px-5">
@@ -98,21 +89,22 @@ export default function HeroSection() {
 
         {/* ── CTAs ── */}
         <div className="mt-7 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">
-          <a
-            href="#registration"
+          
+           <a href="#registration"
             className="inline-flex min-h-[48px] items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-[var(--color-blue-600)] to-[var(--color-blue-700)] px-6 py-3 text-sm font-semibold text-white shadow-[0_10px_24px_rgba(37,99,235,0.22)] transition-all hover:-translate-y-0.5"
           >
             Register Now
             <FaArrowRight size={11} />
           </a>
 
-          <a
-            href="#program"
+          
+           <a href="#program"
             className="inline-flex min-h-[48px] items-center justify-center rounded-2xl border border-[var(--color-primary-200)] bg-white/80 px-6 py-3 text-sm font-semibold text-[var(--color-primary-800)] backdrop-blur transition-all hover:border-[var(--color-blue-300)] hover:bg-white"
           >
             View Program
           </a>
         </div>
+
         {/* ── Meta pills ── */}
         <div className="mt-7 flex flex-wrap items-center justify-center gap-2.5">
           {metaItems.map(({ icon: Icon, label }) => (
@@ -120,10 +112,7 @@ export default function HeroSection() {
               key={label}
               className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/80 px-4 py-2 text-xs font-medium text-[var(--color-primary-700)] shadow-sm backdrop-blur-sm transition-all duration-150 hover:-translate-y-0.5 hover:border-blue-200 hover:bg-white hover:shadow sm:text-[0.8rem]"
             >
-              <Icon
-                size={12}
-                className="shrink-0 text-[var(--color-blue-600)]"
-              />
+              <Icon size={12} className="shrink-0 text-[var(--color-blue-600)]" />
               {label}
             </div>
           ))}
