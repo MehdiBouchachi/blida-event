@@ -277,8 +277,9 @@ function useResponsiveFlag(bp = 640) {
 
 export default function RegistrationSection() {
   const isMobile = useResponsiveFlag(640);
-  const { register, isLoading, error: submitError, isSuccess } = useRegister();
-
+  const { register, isLoading, error: submitError } = useRegister();
+  const [showSuccess, setShowSuccess] = useState(false);
+  const [submittedEmail, setSubmittedEmail] = useState("");
   const [step, setStep] = useState(0);
   const [form, setForm] = useState(INITIAL);
   const [touched, setTouched] = useState({});
@@ -383,7 +384,12 @@ export default function RegistrationSection() {
     (REQUIRED_FIELDS[s] || []).forEach((k) => (t[k] = true));
     setTouched((p) => ({ ...p, ...t }));
   }
-
+  function handleFormKeyDown(e) {
+    const tag = e.target.tagName;
+    if (e.key === "Enter" && tag !== "TEXTAREA") {
+      e.preventDefault();
+    }
+  }
   function focusFirst(s) {
     const first = (REQUIRED_FIELDS[s] || []).find((k) => !validate(k));
     if (!first) return;
@@ -416,20 +422,27 @@ export default function RegistrationSection() {
 
   async function handleSubmit(e) {
     e.preventDefault();
+
+    // ✅ Hard guard: never submit unless we're on the last step
+    if (step !== totalSteps - 1) return;
+
     touchAll(step);
     if (!isStepValid(step)) {
       focusFirst(step);
       return;
     }
 
-    // Flatten arrays → comma-separated strings for Google Sheets
     const payload = {
       ...form,
       submittedAt: new Date().toISOString(),
     };
 
+    const emailSnapshot = form.email;
     const result = await register(payload);
+
     if (result.success) {
+      setSubmittedEmail(emailSnapshot);
+      setShowSuccess(true);
       setForm(INITIAL);
       setStep(0);
       setTouched({});
@@ -442,7 +455,7 @@ export default function RegistrationSection() {
   }
 
   /* ── Success screen ── */
-  if (isSuccess) {
+  if (showSuccess) {
     return (
       <section
         id="registration"
@@ -522,7 +535,7 @@ export default function RegistrationSection() {
             </strong>{" "}
             workshop at Blida 1 University. Check your inbox at{" "}
             <strong style={{ color: "var(--color-blue-600)" }}>
-              {form.email || "the email you provided"}
+              {submittedEmail || "the email you provided"}
             </strong>
             .
           </p>
@@ -556,9 +569,15 @@ export default function RegistrationSection() {
             <button
               type="button"
               onClick={() => {
+                setShowSuccess(false);
+                setSubmittedEmail("");
                 setForm(INITIAL);
                 setStep(0);
                 setTouched({});
+                topRef.current?.scrollIntoView({
+                  behavior: "smooth",
+                  block: "start",
+                });
               }}
               style={{
                 display: "inline-flex",
@@ -662,7 +681,7 @@ export default function RegistrationSection() {
         isMobile={isMobile}
       />
 
-      <form onSubmit={handleSubmit} noValidate>
+      <form onSubmit={handleSubmit} onKeyDown={handleFormKeyDown} noValidate>
         <div
           style={{
             background: "#fff",
@@ -1447,25 +1466,25 @@ export default function RegistrationSection() {
 
                   {step < totalSteps - 1 ? (
                     <button
+                      key="nav-next"
                       type="button"
                       onClick={goNext}
                       disabled={isLoading}
                       style={{
                         display: "flex",
                         alignItems: "center",
-                        justifyContent: "center",
                         gap: 6,
-                        padding: "11px 14px",
-                        borderRadius: 10,
+                        padding: "9px 22px",
+                        borderRadius: 8,
                         background: "var(--color-blue-600, #2563eb)",
                         color: "#fff",
-                        fontSize: "0.84rem",
+                        fontSize: "0.875rem",
                         fontWeight: 600,
                         cursor: "pointer",
                         border: "none",
                       }}
                     >
-                      Next
+                      Next step
                       <svg
                         width="14"
                         height="14"
@@ -1483,20 +1502,20 @@ export default function RegistrationSection() {
                     </button>
                   ) : (
                     <button
+                      key="nav-submit"
                       type="submit"
                       disabled={isLoading}
                       style={{
-                        gridColumn: "1 / -1",
                         display: "flex",
                         alignItems: "center",
-                        justifyContent: "center",
                         gap: 8,
-                        padding: "12px 16px",
-                        borderRadius: 10,
+                        padding: "9px 22px",
+                        borderRadius: 8,
+                        minWidth: 168,
                         background: isLoading ? "#86efac" : "#16a34a",
                         color: "#fff",
                         fontSize: "0.875rem",
-                        fontWeight: 700,
+                        fontWeight: 600,
                         cursor: isLoading ? "not-allowed" : "pointer",
                         border: "none",
                         transition: "background 0.15s",
@@ -1590,6 +1609,7 @@ export default function RegistrationSection() {
 
                 {step < totalSteps - 1 ? (
                   <button
+                    key="next-btn"
                     type="button"
                     onClick={goNext}
                     disabled={isLoading}
@@ -1620,6 +1640,7 @@ export default function RegistrationSection() {
                   </button>
                 ) : (
                   <button
+                    key="submit-btn"
                     type="submit"
                     disabled={isLoading}
                     style={{
