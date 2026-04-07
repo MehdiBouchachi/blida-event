@@ -43,7 +43,7 @@ export default function HeroSection() {
       </div>
 
       {/* ── Content ── */}
-      <div className="relative z-10 mx-auto flex min-h-[100svh] max-w-5xl flex-col items-center justify-center px-4 pb-12 pt-40 text-center sm:px-6 sm:pt-32 lg:px-8">
+      <div className="relative z-10 mx-auto flex min-h-[100svh] max-w-5xl flex-col items-center justify-center px-4 pb-12 pt-28 text-center sm:px-6 sm:pt-28 lg:px-8">
         {/* ── Eyebrow ── */}
         <div className="mb-6 flex justify-center">
           <div className="inline-flex max-w-full items-center gap-2.5 rounded-full border border-blue-200/80 bg-white/90 px-4 py-2 shadow-sm backdrop-blur-sm sm:px-5">
@@ -88,7 +88,7 @@ export default function HeroSection() {
         </p>
 
         {/* ── CTAs ── */}
-        <div className="mt-7 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">
+        <div className="mt-6 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">
           <a
             href="#registration"
             className="inline-flex min-h-[48px] items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-[var(--color-blue-600)] to-[var(--color-blue-700)] px-6 py-3 text-sm font-semibold text-white shadow-[0_10px_24px_rgba(37,99,235,0.22)] transition-all hover:-translate-y-0.5"
@@ -103,6 +103,42 @@ export default function HeroSection() {
           >
             View Program
           </a>
+        </div>
+
+        {/* ── Certification Notice ── */}
+        <div
+          className="
+                mt-9
+                max-w-3xl mx-auto
+                px-5 sm:px-6 py-4
+                rounded-2xl
+                bg-white
+                backdrop-blur
+                border border-[var(--color-primary-200)]
+                shadow-sm
+                text-left
+                relative
+              "
+        >
+          {/* Accent line */}
+
+          <div className="pl-4 sm:pl-5 space-y-1.5">
+            <p
+              className="
+                    text-sm sm:text-[0.95rem]
+                    sm:leading-relaxed
+                    leading-[1.8]
+                    text-[var(--color-primary-700)]
+                  "
+            >
+              <span className="font-semibold text-[var(--color-primary-800)]">
+                Certificate of Attendance:
+              </span>{" "}
+              A named Certificate of Attendance will be issued to all registered
+              participants upon completion of the workshop, along with practical
+              deliverable resources.
+            </p>
+          </div>
         </div>
 
         {/* ── Meta pills ── */}

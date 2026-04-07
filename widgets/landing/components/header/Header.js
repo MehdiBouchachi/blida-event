@@ -6,8 +6,7 @@ import { gsap } from "gsap";
 
 import Logo from "../../../ui/Logo";
 
-const NOTICE_TEXT =
-  "Certification of Attendance: A named certificate will be issued to all registered participants upon completion of the workshop.";
+
 /* ================= CONFIG ================= */
 const NAV_LINKS = [
   { label: "Overview", href: "#learn" },
@@ -143,91 +142,88 @@ export default function Header() {
   return (
     <>
       {/* ================= HEADER ================= */}
-      {/* ================= HEADER WRAPPER ================= */}
-      <div
+      <header
         className={`fixed inset-x-0 top-0 z-50 transition-all duration-300
-  ${hidden ? "-translate-y-full" : "translate-y-0"}`}
-      >
-        {/* ===== NOTIFICATION BAR ===== */}
-        <div
-          className={`w-full text-center text-[13px] md:text-[13.5px]
-    px-4 py-2 font-medium tracking-tight
-    bg-[var(--color-blue-600)] text-white
-    transition-all duration-300`}
-        >
-          {NOTICE_TEXT}
-        </div>
-
-        {/* ===== MAIN HEADER ===== */}
-        <header
-          className={`transition-all duration-300
+    ${hidden ? "-translate-y-full" : "translate-y-0"}
     ${
       scrolled
         ? "bg-[rgba(255,255,255,0.9)] backdrop-blur border-b border-[var(--color-primary-200)]"
         : "bg-transparent"
     }`}
+      >
+        <div
+          className="max-w-7xl mx-auto px-6 h-20
+ flex items-center justify-between"
         >
-          <div
-            className="max-w-7xl mx-auto px-6 h-20
-      flex items-center justify-between"
-          >
-            {/* LEFT */}
-            <a href="#hero" className="flex items-center gap-3">
-              <Logo />
+          {/* LEFT */}
+          <a href="#hero" className="flex items-center gap-3">
+            <Logo />
+          </a>
+
+          {/* CENTER – DESKTOP NAV */}
+          <nav className="hidden md:flex items-center gap-10">
+            {NAV_LINKS.map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                className={`
+    relative
+    text-[16.5px]
+    font-semibold
+    tracking-tight
+    transition-colors
+
+    ${
+      activeSection === item.href
+        ? "text-[var(--color-blue-600)]"
+        : "text-[var(--color-primary-800)] hover:text-[var(--color-blue-600)]"
+    }
+
+    after:absolute
+    after:left-0
+    after:-bottom-1.5
+    after:h-[2px]
+    after:bg-[var(--color-blue-600)]
+    after:transition-all
+
+    ${
+      activeSection === item.href
+        ? "after:w-full"
+        : "after:w-0 hover:after:w-full"
+    }
+  `}
+              >
+                {item.label}
+              </a>
+            ))}
+          </nav>
+
+          {/* RIGHT */}
+          <div className="flex items-center gap-3">
+            {/* Desktop CTA */}
+            <a
+              href="#registration"
+              className="hidden md:inline-flex px-4 py-2 rounded-lg
+             bg-[var(--color-blue-600)] text-white
+             text-sm font-semibold
+             hover:bg-[var(--color-blue-700)] transition"
+            >
+              Registration
             </a>
 
-            {/* CENTER – DESKTOP NAV */}
-            <nav className="hidden md:flex items-center gap-10">
-              {NAV_LINKS.map((item) => (
-                <a
-                  key={item.href}
-                  href={item.href}
-                  className={`
-              relative text-[16.5px] font-semibold tracking-tight transition-colors
-              ${
-                activeSection === item.href
-                  ? "text-[var(--color-blue-600)]"
-                  : "text-[var(--color-primary-800)] hover:text-[var(--color-blue-600)]"
-              }
-              after:absolute after:left-0 after:-bottom-1.5 after:h-[2px]
-              after:bg-[var(--color-blue-600)] after:transition-all
-              ${
-                activeSection === item.href
-                  ? "after:w-full"
-                  : "after:w-0 hover:after:w-full"
-              }
-            `}
-                >
-                  {item.label}
-                </a>
-              ))}
-            </nav>
-
-            {/* RIGHT */}
-            <div className="flex items-center gap-3">
-              <a
-                href="#registration"
-                className="hidden md:inline-flex px-4 py-2 rounded-lg
-          bg-[var(--color-blue-600)] text-white
-          text-sm font-semibold
-          hover:bg-[var(--color-blue-700)] transition"
-              >
-                Registration
-              </a>
-
-              <button
-                onClick={() => setMenuOpen(true)}
-                className="md:hidden p-2
-          text-[var(--color-primary-700)]
-          hover:text-[var(--color-blue-600)] transition"
-                aria-label="Open menu"
-              >
-                <FiMenu size={26} />
-              </button>
-            </div>
+            {/* Mobile menu button */}
+            <button
+              onClick={() => setMenuOpen(true)}
+              className="md:hidden p-2
+             text-[var(--color-primary-700)]
+             hover:text-[var(--color-blue-600)] transition"
+              aria-label="Open menu"
+            >
+              <FiMenu size={26} />
+            </button>
           </div>
-        </header>
-      </div>
+        </div>
+      </header>
 
       {/* ================= MOBILE MENU ================= */}
       {menuOpen && (

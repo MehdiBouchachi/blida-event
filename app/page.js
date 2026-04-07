@@ -32,7 +32,10 @@ const WorkshopDeliverablesSection = dynamic(
     ssr: true,
   },
 );
-
+const CountdownSection = dynamic(
+  () => import("../widgets/landing/sections/CountdownSection"),
+  { ssr: true },
+);
 const RegistrationSection = dynamic(
   () => import("../widgets/landing/sections/RegistrationSection"),
   { ssr: true },
@@ -78,6 +81,7 @@ export default function Page() {
   return (
     <main>
       <HeroSection />
+      <CountdownSection />
       <WhatYouWillLearnSection />
 
       <ResourceCard />
