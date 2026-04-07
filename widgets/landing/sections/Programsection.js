@@ -1037,7 +1037,7 @@ function ProgramMobileView({ sessions }) {
 function OverviewBar() {
   const stats = [
     { label: "Format", value: "Full Day Workshop" },
-    { label: "Time", value: "08:30 – 15:00" },
+    { label: "Time", value: "08:30 – 14:00" },
     { label: "Duration", value: "Approx. 5.30 hours" },
     {
       label: "Structure",
