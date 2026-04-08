@@ -6,7 +6,24 @@ import { useRegister } from "../../../app/_hooks/useRegister"; // adjust path as
 /* ─────────────────────────────────────────────────────────────
    CONFIG
 ───────────────────────────────────────────────────────────── */
+function getAlgeriaTimestamp() {
+  const now = new Date();
 
+  const algeria = new Intl.DateTimeFormat("sv-SE", {
+    timeZone: "Africa/Algiers",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: false,
+  }).formatToParts(now);
+
+  const map = Object.fromEntries(algeria.map((p) => [p.type, p.value]));
+
+  return `${map.year}-${map.month}-${map.day}T${map.hour}:${map.minute}:${map.second}+01:00`;
+}
 const STEPS = [
   {
     id: 1,
@@ -434,7 +451,7 @@ export default function RegistrationSection() {
 
     const payload = {
       ...form,
-      submittedAt: new Date().toISOString(),
+      submittedAt: getAlgeriaTimestamp(),
     };
 
     const emailSnapshot = form.email;
