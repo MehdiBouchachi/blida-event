@@ -1,5 +1,3 @@
-"use client";
-
 import { FaBookOpen, FaLayerGroup, FaCheckSquare } from "react-icons/fa";
 
 const deliverables = [

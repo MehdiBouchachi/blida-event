@@ -1,5 +1,3 @@
-"use client";
-
 import { FaCalendarAlt, FaMapMarkerAlt, FaArrowRight } from "react-icons/fa";
 import { HiAcademicCap } from "react-icons/hi";
 
