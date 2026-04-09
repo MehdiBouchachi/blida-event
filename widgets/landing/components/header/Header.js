@@ -10,7 +10,7 @@ import Logo from "../../../ui/Logo";
 /* ================= CONFIG ================= */
 const NAV_LINKS = [
   { label: "Overview", href: "#learn" },
-  { label: "Resources", href: "#resources" },
+  /* { label: "Resources", href: "#resources" }, */
   { label: "Program", href: "#program" },
   { label: "Deliverables", href: "#deliverables" },
 ];

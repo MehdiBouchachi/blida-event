@@ -6,7 +6,7 @@ import logo from "../../../../public/logo.png";
 import Logo from "../../../ui/Logo";
 const NAV_LINKS = [
   { label: "Overview", href: "#learn" },
-  { label: "Resources", href: "#resources" },
+  /* { label: "Resources", href: "#resources" }, */
   { label: "Program", href: "#program" },
   { label: "Deliverables", href: "#deliverables" },
   { label: "Registration", href: "#registration" },
